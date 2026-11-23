@@ -1,0 +1,642 @@
+/* built by build.js: do not edit by hand, change the page sources and build again */
+html,body{height:100%;margin:0}#dc-root,#dc-root>.sc-host{height:100%}
+@media print{@page{margin:.5cm}figure,table{break-inside:avoid}#dc-root,#dc-root>.sc-host{height:auto}*,*::before,*::after{print-color-adjust:exact;-webkit-print-color-adjust:exact;animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;transition-duration:0s !important}}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(../fonts/inter-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/inter-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/inter-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/playfair-display-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600;font-display:swap;src:url(../fonts/playfair-display-latin-600-italic.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/playfair-display-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url(../fonts/playfair-display-latin-700-italic.woff2) format('woff2')}
+@font-face{font-family:'Silkscreen';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/silkscreen-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Silkscreen';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/silkscreen-latin-700-normal.woff2) format('woff2')}
+
+/* ---------- ScrollTrial */
+body{margin:0}
+.trial{position:relative;container:trial / inline-size;scrollbar-width:thin}
+.sx,.sx *{box-sizing:border-box}
+.serif{font-family:'Playfair Display',Georgia,serif;font-weight:700}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- scene 1: the hero holds still while the scroll plays it. One value drives every moving part. */
+.sc-hero{position:relative;height:420vh}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#FCFCFC}
+.top{position:absolute;left:0;right:0;top:0;z-index:4;height:clamp(56px,9vh,76px);padding:0 6cqw;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.top-nav{display:flex;align-items:center;gap:8px}
+.top-nav button{display:inline-flex;align-items:center;min-height:clamp(36px,5.4vh,44px);padding:0 12px;border:0;background:transparent;color:#030711;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer}
+.top-nav button:hover{text-decoration:underline;text-underline-offset:6px}
+.top-nav .talk{padding:0 20px;margin-left:8px;border-radius:999px;background:#17203A;color:#FFFFFF;font-weight:600;transition:background-color .18s ease,color .18s ease}
+.top-nav .talk:hover{background:var(--acc,#F2B544);color:#17203A;text-decoration:none}
+.tape{--cw:calc(clamp(104px,25.5vh,230px) * .8235 + 36px + 6cqw);position:absolute;left:0;right:0;top:0;height:calc(49% - 10px);z-index:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - var(--cw) - 72px),transparent calc(100% - var(--cw) - 8px));mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - var(--cw) - 72px),transparent calc(100% - var(--cw) - 8px))}
+.track{position:absolute;left:0;bottom:0;white-space:nowrap;font-size:max(40px,min(12.4vh,7.8cqw));line-height:1.1;letter-spacing:-.02em;will-change:transform}
+.ph{display:inline-flex;flex-direction:column;align-items:flex-start;gap:clamp(8px,1.6vh,14px);vertical-align:bottom;margin-right:34cqw}
+.ph-key .ph-t{font-size:1.16em}
+.tg{display:inline-flex;align-items:center;gap:8px;height:clamp(28px,4.2vh,34px);padding:0 14px;border-radius:999px;background:#F1F3F6;font-family:Inter,system-ui,sans-serif;font-size:15px;font-weight:500;line-height:1;letter-spacing:0;color:#5B6472;white-space:nowrap}
+.tg i{display:block;width:8px;height:8px;border-radius:50%;background:var(--acc,#F2B544)}
+.tg b{font-weight:700;color:#17203A}
+.mark{display:inline-block;padding:0 .16em;border-radius:.14em;background:var(--acc,#F2B544);color:#17203A}
+/* the floor line: the headline stands on it, it runs into the chibi's seat and fills as you scroll */
+.floor{position:absolute;left:6cqw;right:calc(6cqw + min(34cqw,480px) - 24px);top:49%;z-index:1;height:3px;border-radius:2px;background:#E1E5EB;overflow:hidden}
+.floor i{display:block;width:100%;height:100%;background:#17203A;transform-origin:left center;transform:scaleX(.333)}
+.short-go{position:absolute;left:6cqw;bottom:7%;z-index:2;min-height:44px;padding:0;border:0;background:transparent;color:#17203A;font-family:inherit;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.short-go:hover{text-decoration-color:var(--acc,#F2B544);text-decoration-thickness:2px}
+/* the scroll cue on the first screen: a little mouse with a rolling wheel and a plain instruction, bottom centre. It fades out once the scroll starts.
+   It is also a button: a click plays the opening for anyone who does not scroll */
+.hint{position:absolute;left:50%;bottom:clamp(8px,calc(5vh - 8px),36px);z-index:2;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 14px;border:0;border-radius:16px;background:transparent;font-family:inherit;font-size:17px;font-weight:700;line-height:1.2;color:#17203A;white-space:nowrap;cursor:pointer}
+.hint:focus-visible{outline:3px solid var(--acc,#F2B544);outline-offset:2px}
+.hint-mouse{transition:background-color .18s ease}
+.hint:hover .hint-mouse,.hint:focus-visible .hint-mouse{background:#FFF6E0}
+.hint-mouse{position:relative;width:34px;height:54px;border:3px solid #17203A;border-radius:17px}
+.hint-mouse i{position:absolute;left:50%;top:8px;width:6px;height:11px;margin-left:-3px;border-radius:3px;background:var(--acc,#F2B544);box-shadow:0 0 0 1.5px #17203A;animation:hint-wheel 1.6s ease-in-out infinite}
+@keyframes hint-wheel{0%{transform:translateY(0);opacity:0}20%{opacity:1}70%{transform:translateY(18px);opacity:1}100%{transform:translateY(18px);opacity:0}}
+@keyframes hint-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.hint svg{margin-top:-6px;animation:hint-bob 1.6s ease-in-out infinite}
+/* touch screens get the same cue in their own words */
+.hint-coarse{display:none}
+@media (pointer:coarse){.hint-mouse,.hint-fine{display:none}.hint-coarse{display:inline}}
+/* on narrow windows the centre would run into the 60-second link, so the cue moves to the right */
+@container trial (max-width: 920px){.hint{left:auto;right:calc(6cqw - 14px);transform:none}}
+.panel{--ch:clamp(104px,25.5vh,230px);position:absolute;right:6cqw;top:49%;z-index:3;width:min(34cqw,480px);height:clamp(44px,7.6vh,68px);border-radius:clamp(16px,2.8vh,24px);background:#17203A;color:#FFFFFF}
+.panel-in{position:absolute;inset:0;overflow:hidden;border-radius:inherit}
+/* before the seat opens it says what it is about to become, so it does not read as an empty box */
+.seat-tip{position:absolute;left:22px;top:0;height:clamp(44px,7.6vh,68px);display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C3CBDB;white-space:nowrap;pointer-events:none}
+.chibi{position:absolute;right:36px;top:calc(var(--ch) * -.765);width:calc(var(--ch) * .8235);height:var(--ch);z-index:2;pointer-events:none;will-change:transform}
+.pose{position:absolute;inset:0;opacity:0;transition:opacity .16s linear}
+.pose.on{opacity:1}
+.bubble{position:absolute;right:86px;bottom:calc(100% + var(--ch) * .765 + 10px);width:min(300px,30cqw);height:0}
+.say{position:absolute;right:0;bottom:0;max-width:100%;padding:clamp(8px,1.5vh,12px) 16px;border-radius:18px 18px 4px 18px;background:#FFFFFF;border:2px solid #17203A;color:#17203A;font-size:clamp(14px,2.1vh,17px);font-weight:600;line-height:1.4;opacity:0;transform-origin:100% 100%;will-change:transform,opacity}
+.hl{padding:0 2px;border-radius:2px;background:linear-gradient(transparent 42%,var(--acc,#F2B544) 42%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.say:first-child{opacity:1}
+/* the "hello first" opening (data-opening="hello"): the page opens on the amber Hello scene, then the numbers banner, then the story.
+   Both are ordinary sections that scroll away, so the first move a visitor makes is plain scrolling. Without the option they stay out of the page */
+.hi{--ch:clamp(104px,25.5vh,230px);position:relative;z-index:2;height:100vh;overflow:hidden;border-radius:0 0 50% 50% / 0 0 9vh 9vh;background:var(--acc,#F2B544);color:#17203A}
+.hi-in{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:0 24px clamp(34px,7vh,68px);box-sizing:border-box}
+/* the numbers banner: the four figures a recruiter should see before the story. It tucks under the curved hem of the Hello scene */
+.n2{position:relative;z-index:1;margin-top:-9vh;padding:calc(9vh + clamp(34px,6.5vh,60px)) 24px clamp(38px,7vh,64px);background:#17203A;color:#FFFFFF}
+.n2-in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px}
+.n2-i{min-width:0;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.n2-n{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(52px,6.4cqw,76px);line-height:1;font-variant-numeric:lining-nums tabular-nums;color:var(--acc,#F2B544)}
+.n2-l{max-width:22ch;font-size:16px;line-height:1.4;color:#C3CBDB}
+@container trial (max-width: 700px){.n2-in{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* over the Hello scene the menu takes the scene's own colour, so the big word passes under it cleanly */
+.trial:not(.lite) .bar.on-hi:not(.solid){background:var(--acc,#F2B544)}
+.hi-word{position:absolute;left:0;right:0;top:min(11vh,calc(32vh - 147px));text-align:center;white-space:nowrap;font-size:min(26.5cqw,42vh);line-height:.9;letter-spacing:-.03em;pointer-events:none}
+.hi-card{position:relative;z-index:1;width:min(100%,580px);padding:clamp(20px,4vh,34px) 32px clamp(18px,3.6vh,30px);box-sizing:border-box;border-radius:28px;background:#17203A;color:#FFFFFF;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(6px,1.3vh,12px)}
+.hi-chibi{position:absolute;right:32px;top:calc(var(--ch) * -.765);width:calc(var(--ch) * .8235);height:var(--ch);pointer-events:none}
+.hi-name{margin:0;font-size:clamp(26px,min(4cqw,5.6vh),40px);line-height:1.15;letter-spacing:-.01em}
+.hi-line{margin:0;font-size:clamp(15px,2.2vh,18px);line-height:1.5;color:#C3CBDB;text-wrap:balance}
+.hi-line b{font-weight:700;color:var(--acc,#F2B544)}
+/* the AI skills are one quiet list inside the card: plain words with a small dot. No boxes, so they do not read as buttons,
+   and all in one place, so the screen has a single thing to look at after the word */
+.hi-skills{align-self:stretch;display:flex;flex-direction:column;gap:clamp(6px,1.1vh,9px);margin-top:clamp(4px,1vh,10px);padding-top:clamp(10px,1.9vh,16px);border-top:1px solid #36426A}
+.hi-label{font-size:12px;color:#C3CBDB}
+.hi-proof{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+.hi-pf{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;width:100%;min-height:clamp(22px,3.1vh,28px);padding:0;border:0;background:transparent;color:#FFFFFF;font-family:inherit;text-align:left;cursor:pointer}
+.hi-pf b{display:inline-flex;align-items:center;gap:8px;font-size:clamp(14px,2vh,16px);font-weight:600;line-height:1.35;white-space:nowrap}
+.hi-pf b::before{content:"";flex:0 0 6px;width:6px;height:6px;border-radius:50%;background:var(--acc,#F2B544)}
+.hi-pf span{font-size:clamp(13px,1.85vh,15px);line-height:1.35;color:#C3CBDB}
+.hi-pf:hover b,.hi-pf:focus-visible b{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--acc,#F2B544)}
+/* the two real actions of the first screen are the only buttons on it, inside the card: start the story, or take the 60-second version.
+   So the loose scroll cue is not needed here, and the 60-second link at the bottom left waits under the curtain for the story screens */
+.hi-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(6px,1.5vh,14px)}
+.hi-btns .btn{font-family:inherit;white-space:nowrap;cursor:pointer}
+.hi-btns .btn:focus-visible{outline:3px solid #FFFFFF;outline-offset:2px}
+.hi-play svg{animation:hint-bob 1.6s ease-in-out infinite}
+.trial[data-opening="hello"]:not(.lite) .hint{display:none}
+.trial.calm .hi-play svg{animation:none}
+@media (prefers-reduced-motion:reduce){.hi-play svg{animation:none}}
+/* a calm entrance when the page loads, in two moves only: the word eases in, then the card rises as one piece.
+   Nothing inside the card moves on its own, so there is one thing to follow at a time. It is slow and short in distance on purpose, so it drifts in rather than rushes. It plays once */
+@keyframes hi-word-in{from{opacity:0;transform:translateY(16px)}}
+@keyframes hi-rise{from{opacity:0;transform:translateY(20px)}}
+/* the entrance: the word fades in while settling from slightly larger, then the card (with the chibi on it) slides up from below, then the start cue fades in.
+   Slow, three steps, and the word and the card deliberately arrive in different ways.
+   It starts when the script adds hi-go, which it does once the Hello screen is really on screen; until then hi-wait keeps the three out of sight */
+@keyframes hi-in-word{from{opacity:0;transform:scale(1.07)}}
+@keyframes hi-in-card{from{opacity:0;transform:translateY(64px)}}
+@keyframes hi-in-cue{from{opacity:0}}
+.trial.hi-wait .hi-word,.trial.hi-wait .hi-card,.trial.hi-wait .hi-cue{opacity:0;animation:none}
+.trial.hi-go .hi-word{animation:hi-in-word 2s cubic-bezier(.22,.6,.25,1) .15s backwards}
+.trial.hi-go .hi-card{animation:hi-in-card 1.7s cubic-bezier(.22,.6,.25,1) 1s backwards}
+.trial.hi-go .hi-cue{animation:hi-in-cue 1.2s ease-out 2.5s backwards}
+.trial.calm .hi-word,.trial.calm .hi-card,.trial.calm .hi-cue{opacity:1 !important;animation:none !important}
+@media print{.hi-word,.hi-card,.hi-cue{opacity:1 !important;animation:none !important}}
+@media (prefers-reduced-motion:reduce){.hi-word,.hi-card{animation:none}}
+.say:last-child{text-wrap:balance}
+.paths{position:absolute;left:0;right:0;top:0;height:44vh;padding:calc(var(--ch) * .28) 24px clamp(12px,2.6vh,22px);display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(5px,1.1vh,10px);opacity:0;visibility:hidden;pointer-events:none;will-change:opacity}
+.paths-q{margin-bottom:auto;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(16px,3.3vh,28px);line-height:1.2}
+.path{display:flex;align-items:center;gap:12px;min-height:clamp(34px,6.8vh,60px);padding:clamp(4px,1.1vh,10px) 16px;border-radius:clamp(10px,1.8vh,16px);border:1px solid #36426A;background:#222D4E;color:#FFFFFF;font-family:inherit;text-align:left;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background-color .18s ease,box-shadow .18s ease}
+.path:hover,.path.lit{transform:translateX(6px);border-color:var(--acc,#F2B544)}
+.path.lit{background:#2B3862;box-shadow:0 0 0 1px var(--acc,#F2B544)}
+.paths:hover .path.lit:not(:hover){transform:none;border-color:#36426A;background:#222D4E;box-shadow:none}
+.path-t{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.path b{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(14px,2.5vh,19px);line-height:1.25}
+.path small{font-size:14px;line-height:1.35;color:#C3CBDB}
+.trial.tight .path small{display:none}
+.path svg{flex:0 0 18px;color:var(--acc,#F2B544)}
+
+/* the circle that grows out of the panel: amber leads, navy follows and already carries the next heading */
+.wipe{position:absolute;inset:0;clip-path:circle(0px at 80% 60%);pointer-events:none}
+.wipe-lead{z-index:6;background:var(--acc,#F2B544)}
+.wipe-main{z-index:7;overflow:hidden;background:#17203A;color:#FFFFFF}
+.band{position:absolute;left:0;top:9vh;white-space:nowrap;font-size:min(25cqw,44vh);line-height:1;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px #46548A;will-change:transform;pointer-events:none}
+.work-head{position:absolute;left:0;right:0;bottom:calc(12vh + clamp(16px,3vh,28px))}
+.work-in{position:relative;max-width:1120px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:clamp(12px,2.6vh,24px)}
+.lines{margin:0;font-size:clamp(34px,min(6.4cqw,10vh),80px);line-height:1.08;letter-spacing:-.015em}
+.ln{display:block;overflow:hidden;padding-bottom:.08em}
+.ln>span{display:block;transform:translateY(108%);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.ln:nth-child(2)>span{transition-delay:.12s}
+.lines.in .ln>span{transform:none}
+
+/* ---------- scene 2: the cards carry on from the heading the circle revealed */
+/* one menu for the whole page. It takes no room: it floats over the top edge.
+   Wide screens: it is there from the first screen, see-through over the opening, and turns into a solid strip the moment the wipe or the page passes under it.
+   Because it never comes and goes, nothing can double up or pop while scrolling either way.
+   Phones: it appears once the opening is behind you, steps aside while you scroll down and comes back when you scroll up */
+.bar-wrap{position:sticky;top:0;z-index:6;height:0}
+.bar{position:absolute;left:0;right:0;top:0;height:56px;padding:0 6cqw;display:flex;align-items:center;justify-content:space-between;gap:16px;background:#FCFCFC;border-bottom:1px solid #E1E5EB;box-shadow:0 6px 18px rgba(23,32,58,.06);transform:translateY(-120%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s}
+.bar.on{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+.bar button{border:0;background:transparent;font-family:inherit;color:#030711;cursor:pointer}
+.bar .bar-name{padding:0;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:22px;white-space:nowrap}
+.bar-left{display:flex;align-items:center;gap:18px;min-width:0}
+/* the way back after a button inside the page took the visitor somewhere else. On wide screens it lives here, in the menu, where it covers nothing;
+   on phones the page inside shows its own floating button instead */
+@keyframes bar-back-in{from{opacity:0;transform:translateX(-12px)}}
+/* a short call for attention when it arrives: two soft pulses, then it rests, so it is noticed without nagging while people read */
+@keyframes bar-back-call{0%{box-shadow:0 0 0 0 rgba(23,32,58,.5);transform:scale(1)}28%{transform:scale(1.08)}56%{transform:scale(1)}100%{box-shadow:0 0 0 16px rgba(23,32,58,0);transform:scale(1)}}
+.bar .bar-back{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px 0 10px;border-radius:999px;background:var(--acc,#F2B544);color:#17203A;font-size:14px;font-weight:600;white-space:nowrap;animation:bar-back-in .4s cubic-bezier(.2,.7,.2,1) .5s backwards,bar-back-call 1.3s ease-out 1.1s 2;transition:background-color .18s ease,color .18s ease}
+.bar .bar-back:hover{background:#17203A;color:#FFFFFF}
+.bar .bar-back[hidden],.trial.lite .bar .bar-back{display:none}
+.bar-back-t::after{content:attr(data-label)}
+@container trial (max-width: 1040px){.bar-back-t::after{content:"Back"}}
+.trial:not(.lite) .trial-main .back-pill{display:none}
+.trial.calm .bar .bar-back{animation:none}
+/* "Let's talk" jumps to the end of the page from wherever the visitor is. The way back is the same button: in the menu on wide screens,
+   and on phones this floating one, which shrinks to a round arrow in the corner once they scroll on */
+.spot-wrap{position:sticky;bottom:0;z-index:5;height:0}
+@keyframes spot-in{from{opacity:0;transform:translate(-50%,16px)}}
+.spot-pill{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;min-width:48px;padding:0 20px 0 16px;box-sizing:border-box;border-radius:999px;border:2px solid #FFFFFF;background:#17203A;color:#FFFFFF;font-family:inherit;font-size:15px;font-weight:600;white-space:nowrap;cursor:pointer;box-shadow:0 10px 24px rgba(23,32,58,.28);animation:spot-in .4s cubic-bezier(.2,.7,.2,1) .7s backwards;transition:left .35s ease,transform .35s ease,padding .35s ease,gap .35s ease}
+.spot-pill>span{display:block;max-width:240px;overflow:hidden;transition:max-width .35s ease,opacity .2s ease}
+.spot-pill.small{left:16px;transform:none;padding:0;gap:0}
+.spot-pill.small>span{max-width:0;opacity:0}
+.spot-pill[hidden],.trial:not(.lite) .spot-pill{display:none}
+.trial.has-spot .trial-main .back-pill{display:none}
+.trial.calm .spot-pill,.trial.calm .spot-pill>span{animation:none;transition:none}
+.bar-links{display:flex;align-items:center;gap:4px}
+.bar-go{min-height:40px;padding:0 12px;font-size:15px;font-weight:500;white-space:nowrap}
+.bar-go:hover{text-decoration:underline;text-underline-offset:6px}
+.bar-go[aria-current="true"]{font-weight:700;text-decoration:underline;text-decoration-color:var(--acc,#F2B544);text-decoration-thickness:3px;text-underline-offset:6px}
+.bar .bar-talk{min-height:40px;margin-left:8px;padding:0 18px;border-radius:999px;background:#17203A;color:#FFFFFF;font-size:15px;font-weight:600;white-space:nowrap;transition:background-color .18s ease,color .18s ease}
+.bar .bar-talk:hover{background:var(--acc,#F2B544);color:#17203A}
+.trial:not(.lite) .top{visibility:hidden}
+.trial:not(.lite) .bar{height:clamp(56px,8vh,64px);gap:24px;transform:none;visibility:visible;transition:border-color .2s ease,box-shadow .2s ease}
+.trial:not(.lite) .bar:not(.solid){background:transparent;border-bottom-color:transparent;box-shadow:none}
+.trial:not(.lite) .bar-links{gap:8px}
+.trial:not(.lite) .bar-go,.trial:not(.lite) .bar .bar-talk{min-height:clamp(36px,5.4vh,44px)}
+.trial:not(.lite) .bar .bar-talk{padding:0 20px}
+.trial.lite .bar{height:52px;padding:0 10px;justify-content:center}
+.trial.lite .bar-name{display:none}
+.trial.lite .bar-links{flex:1 1 auto;justify-content:space-between;gap:0}
+.trial.lite .bar-go{padding:0 8px;font-size:clamp(13px,3.7cqw,15px)}
+.trial.lite .bar .bar-talk{margin-left:0;padding:0 14px;font-size:clamp(13px,3.7cqw,15px)}
+.trial.calm .bar{transition:none}
+/* the product activity has its own strip that sticks to the top on narrow screens: keep it below the menu, not behind it */
+.trial-main .sprint-bar{transition:top .25s ease}
+.trial:not(.lite) .trial-main .sprint-bar{top:calc(clamp(56px,8vh,64px) + 8px) !important}
+.trial.lite.menu-on .trial-main .sprint-bar{top:60px !important}
+.trial.calm .trial-main .sprint-bar{transition:none}
+.work{position:relative;background:#17203A;color:#FFFFFF;margin-top:-12vh;padding:0 0 clamp(56px,10vh,96px)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px}
+.card{width:100%;height:100%;padding:0;border:0;border-radius:16px;overflow:hidden;background:#FFFFFF;color:#030711;font-family:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column;will-change:transform;transition:box-shadow .18s ease}
+.card:hover,.card:focus-visible{box-shadow:0 0 0 3px var(--acc,#F2B544)}
+.card-open{margin-top:auto;padding-top:8px;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#17203A}
+.card-open svg{transition:transform .18s ease}
+.card:hover .card-open svg{transform:translateX(4px)}
+.see-all{align-self:flex-start;min-height:44px;padding:0;border:0;background:transparent;color:#FFFFFF;font-family:inherit;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.see-all:hover{color:var(--acc,#F2B544)}
+.card-art{display:flex;justify-content:center;padding:14px 0;background:#F1F3F6}
+.card-art>span{display:block;width:180px}
+.card-body{flex:1 1 auto;display:flex;flex-direction:column;gap:6px;padding:18px 20px 20px}
+.card-body .eyebrow{color:#5B6472}
+.card-title{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:20px;line-height:1.25}
+/* the key fact: one supporting sentence under the title, with the keyword in bold on a yellow marker */
+.card-fact{margin-top:4px;font-size:16px;line-height:1.5;color:#5B6472}
+.card-fact b{font-weight:700;color:#17203A;padding:0 2px;margin-left:-2px;border-radius:2px;background:linear-gradient(transparent 42%,var(--acc,#F2B544) 42%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- the full homepage sits here. Its own top bar, opening, featured row and sign-off are replaced by the scenes around it. */
+.trial-main #top{min-height:0 !important}
+.trial-main #top>header,.trial-main #top>section[aria-label="Introduction"],.trial-main #featured,.trial-main #closing,.trial-main #copyright{display:none !important}
+.trial-main #contact>div{padding-bottom:104px !important}
+
+/* ---------- scene 3: the goodbye rises as a dome that flattens, echoing the circle */
+.hello{--ch:clamp(104px,25.5vh,230px);position:relative;overflow:hidden;min-height:100vh;background:#17203A;color:#17203A;display:flex;align-items:flex-end;justify-content:center;padding:0 24px 9vh}
+.hello-bg{position:absolute;inset:0;background:var(--acc,#F2B544);border-radius:50% 50% 0 0 / var(--arc,0px) var(--arc,0px) 0 0}
+.hello-word{position:absolute;left:0;right:0;top:20vh;text-align:center;white-space:nowrap;font-size:min(18.5cqw,29.3vh);line-height:.9;letter-spacing:-.03em;will-change:transform;pointer-events:none}
+.hello-card{position:relative;width:min(100%,560px);padding:clamp(20px,4vh,36px) 32px clamp(18px,3.6vh,32px);border-radius:28px;background:#17203A;color:#FFFFFF;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(8px,1.6vh,14px);will-change:transform}
+.hello-chibi{position:absolute;right:32px;top:calc(var(--ch) * -.765);width:calc(var(--ch) * .8235);height:var(--ch);pointer-events:none}
+.hello-card h2{margin:0;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(26px,min(4cqw,5.6vh),40px);line-height:1.15;letter-spacing:-.01em;max-width:320px}
+.hello-card p{margin:0;font-size:16px;line-height:1.5;color:#C3CBDB;text-wrap:balance}
+.hello-btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid var(--acc,#F2B544);border-radius:999px;background:var(--acc,#F2B544);color:#17203A;font-size:15px;font-weight:600;text-decoration:none;transition:transform .18s ease}
+.btn-line{background:transparent;border-color:#FFFFFF;color:#FFFFFF}
+.btn:hover{transform:translateY(-2px)}
+.foot{padding:20px 24px;background:#17203A;color:#C3CBDB;font-size:13px;text-align:center}
+
+.mini{display:none}
+/* ---------- phones, very short windows and reduced motion: no held scene. One clean statement, one supporting line, then the chibi's seat with the three paths */
+.trial.lite .sc-hero{height:auto}
+.trial.lite .stage{position:relative;height:auto;overflow:visible;padding:100px 0 0;display:flex;flex-direction:column;align-items:center;gap:0}
+.trial.lite .top{height:64px;padding:0 20px;gap:12px}
+.trial.lite .hi{--ch:132px;height:auto;overflow:visible;border-radius:0 0 50% 50% / 0 0 30px 30px}
+.trial.lite .hi-in{position:static;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:76px 20px 40px}
+.trial.lite .n2{margin-top:-30px;padding:70px 20px 44px}
+.trial.lite .n2-n{font-size:52px}
+.trial.lite .n2-l{font-size:15px}
+.trial.lite[data-opening="hello"] .stage{padding-top:44px}
+.trial.lite .hi-word{position:static;font-size:27cqw;line-height:1}
+.trial.lite .hi-card{width:auto;margin-top:calc(var(--ch) * .46);padding:24px 22px 22px;border-radius:24px}
+.trial.lite .hi-chibi{right:18px}
+.trial.lite .hi-name{font-size:30px}
+.trial.lite .hi-line{font-size:16px}
+.trial.lite .hi-pf{min-height:44px;align-content:center}
+.trial.lite .hi-pf b{font-size:15px}
+.trial.lite .hi-pf span{font-size:13px}
+.trial.lite .hi-play{display:none}
+.trial.lite #sc-hi-short{background:var(--acc,#F2B544);border-color:var(--acc,#F2B544);color:#17203A}
+.trial.lite[data-opening="hello"] .track{font-size:clamp(30px,9.6cqw,40px)}
+.trial.lite .top>span,.trial.lite .top-nav .talk{white-space:nowrap}
+.trial.lite .top-nav .talk{margin-left:0}
+.trial.lite .top-nav button:not(.talk){display:none}
+.trial.lite .tape{position:relative;width:min(100%,520px);height:auto;overflow:visible;-webkit-mask-image:none;mask-image:none}
+.trial.lite .track{position:static;white-space:normal;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0 20px;font-size:clamp(38px,12.8cqw,54px)}
+/* each line starts hidden and arrives when the script marks it .in; the timing lives on the arrived state so hiding is instant */
+.trial.lite .ph{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:0;margin:0;opacity:0;transform:translateY(12px)}
+.trial.lite .ph.in{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+.trial.lite .ph.in:nth-child(2){transition-delay:.15s}
+.trial.lite .ph.in:nth-child(3){transition-delay:.3s}
+.trial.lite .tg{display:none}
+/* the small timeline strip above the headline: three dots on a line, each arriving with its headline line */
+.trial.lite .mini{display:grid;grid-template-columns:minmax(0,170px) minmax(0,170px) auto;justify-content:start;width:min(100%,520px);margin:0 0 20px;padding:0 20px;font-size:13px;line-height:1.2;color:#5B6472}
+.mini-s{position:relative;padding:19px 14px 0 0;white-space:nowrap;opacity:0}
+.mini-s:last-child{padding-right:0}
+.mini-s b{margin-right:5px;font-weight:700;color:#17203A}
+.mini-s i{position:absolute;left:0;top:0;width:11px;height:11px;border-radius:50%;border:2.5px solid #17203A;background:var(--acc,#F2B544)}
+.mini-s:not(:last-child)::before{content:"";position:absolute;left:11px;right:0;top:4.5px;height:2px;background:#17203A;transform:scaleX(0);transform-origin:0 50%}
+.trial.lite .mini.in .mini-s{opacity:1;transition:opacity .4s ease}
+.trial.lite .mini.in .mini-s::before{transform:none;transition:transform .35s ease-out .1s}
+.trial.lite .mini.in .mini-s:nth-child(2){transition-delay:.15s}
+.trial.lite .mini.in .mini-s:nth-child(2)::before{transition-delay:.25s}
+.trial.lite .mini.in .mini-s:nth-child(3){transition-delay:.3s}
+.trial.lite .ph-t{white-space:nowrap}
+.trial.lite .ph-key .ph-t{font-size:1em}
+/* the yellow wipes in behind the last line once it has arrived */
+.trial.lite .ph-key .mark{margin-left:-.14em;background:linear-gradient(var(--acc,#F2B544),var(--acc,#F2B544)) no-repeat 0 0 / 0% 100%}
+.trial.lite .ph-key.in .mark{background-size:100% 100%;transition:background-size .45s ease .6s}
+/* the supporting line: the summary that is otherwise only read out by screen readers */
+.trial.lite .sum{position:static;order:1;width:min(100%,520px);height:auto;margin:18px 0 0;padding:0 20px;overflow:visible;clip:auto;white-space:normal;font-size:16px;line-height:1.55;color:#5B6472;opacity:0;transform:translateY(12px)}
+.trial.lite.said .sum{opacity:1;transform:none;transition:opacity .4s ease .5s,transform .4s ease .5s}
+.trial.lite.calm .ph.in,.trial.lite.calm .ph-key.in .mark,.trial.lite.calm.said .sum,.trial.lite.calm .mini.in .mini-s,.trial.lite.calm .mini.in .mini-s::before{transition:none}
+.trial.lite .floor,.trial.lite .hint,.trial.lite .wipe-lead,.trial.lite .seat-tip{display:none}
+.trial.lite .bubble{right:auto;left:4px;bottom:calc(100% + 16px);width:min(184px,calc(100% - 150px))}
+.trial.lite .say{display:none}
+.trial.lite .say:last-child{display:block;left:0;right:auto;opacity:1;padding:10px 14px;font-size:clamp(13px,3.9cqw,15px);border-radius:16px 16px 4px 16px}
+.trial.lite .short-go{order:3;position:static;width:min(100%,520px);min-height:44px;margin-top:8px;padding:0 20px;font-size:14px;text-align:center}
+.trial.lite .panel{--ch:134px;order:2;position:relative;right:auto;top:auto;width:calc(min(100%,520px) - 32px);height:auto;margin:124px 0 0;border-radius:22px}
+.trial.lite .panel-in{position:static;overflow:visible}
+.trial.lite .paths{position:static;height:auto;padding:46px 18px 18px;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto repeat(3,1fr);gap:8px;opacity:1;visibility:visible;pointer-events:auto}
+.trial.lite .paths-q{margin-bottom:8px;font-size:24px}
+.trial.lite .path{min-height:62px;padding:8px 14px;border-radius:14px}
+.trial.lite .path b{font-size:17px}
+.trial.lite .path small{display:block}
+.trial.lite .wipe-main{order:4;position:relative;inset:auto;align-self:stretch;clip-path:none;margin-top:24px;padding:104px 0 28px;border-radius:50% 50% 0 0 / 34px 34px 0 0}
+.trial.lite .work-head{position:static}
+.trial.lite .work{margin-top:-1px}
+.trial.lite .band{top:30px;font-size:21cqw;-webkit-text-stroke-width:1.5px}
+.trial.lite .lines{font-size:clamp(34px,9cqw,56px)}
+.trial.lite .hello{--ch:200px;min-height:max(100vh,600px)}
+.trial.lite .hello-word{top:11vh;font-size:27cqw;line-height:.95}
+.trial.lite .hello-word span{display:block}
+.trial.calm .ln>span{transform:none}
+@media (prefers-reduced-motion:reduce){.hint svg,.hint-mouse i{animation:none}.pose,.ln>span{transition:none}}
+/* ---------- three trial openings (data-mock), each on its own mock board. The page in use sets none of them.
+   one: everything on the first screen, no banner. join: the banner stays, and each scene rises over the one before with a domed top, like the ending.
+   split: a two-sided first screen, who I am on the left, the numbers and skills on the right. In all three the Hello screen holds still while the next scene rises over it */
+.hi-pin{position:relative}
+.hi-nums{display:none}
+.hi-figs{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,2.2vh,20px) 20px}
+.hi-figs li{min-width:0;display:flex;flex-direction:column;gap:4px}
+.hi-figs b{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(32px,min(3.8cqw,6vh),50px);line-height:1;font-variant-numeric:lining-nums tabular-nums;color:var(--acc,#F2B544)}
+.hi-figs span{font-size:clamp(13px,1.85vh,14.5px);line-height:1.35;color:#C3CBDB}
+.trial.calm .hi-nums,.trial.calm .hi-skills,.trial.calm .hi-btns{animation:none !important}
+@media (prefers-reduced-motion:reduce){.hi-nums,.hi-skills,.hi-btns{animation:none !important}}
+/* the drawing has empty margin inside its own frame (13% above the hair, 4% under the shoes, 22% at the sides), so the frame is set a little larger than the box above */
+.hi-cue{display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin-top:clamp(2px,1.2vh,14px);padding:4px 14px;border:0;border-radius:14px;background:transparent;font-family:inherit;font-size:clamp(14px,2vh,16px);font-weight:700;line-height:1.3;color:#17203A;white-space:nowrap;cursor:pointer}
+.hi-cue svg{animation:hint-bob 1.6s ease-in-out infinite}
+.trial.lite .hi-cue{display:none}
+.trial.calm .hi-cue,.trial.calm .hi-cue svg{animation:none}
+@media (prefers-reduced-motion:reduce){.hi-cue,.hi-cue svg{animation:none}}
+/* the page in use (no mock): no banner after Hello. The Hello screen holds still while the story rises over it with a domed top, the same join as the ending;
+   the wrapper is two screens tall and the story overlaps its second screen. The numbers are in the homepage's own strip further down */
+.trial[data-opening="hello"][data-mock="none"] .n2{display:none !important}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi{position:sticky;top:0;z-index:1;border-radius:0}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-pin{height:200vh}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .sc-hero{z-index:3;margin-top:-100vh;border-radius:50% 50% 0 0 / 9vh 9vh 0 0;background:#FCFCFC;overflow:clip}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi{border-radius:0}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi-in{padding-bottom:66px}
+.trial.lite[data-opening="hello"][data-mock="none"] .sc-hero{z-index:3;margin-top:-30px}
+.trial.lite[data-opening="hello"][data-mock="none"] .stage{border-radius:50% 50% 0 0 / 30px 30px 0 0}
+.work{z-index:4}
+/* the ending card: a round space for a photo of Shermaine, to the left of the heading and the sentence; the buttons run underneath.
+   On phones the photo sits beside the heading only and the sentence takes the full width, so the card grows as little as possible */
+.hello-card{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:20px;align-items:center}
+.hello-photo{grid-column:1;grid-row:1 / span 2;width:clamp(84px,13vh,112px);height:clamp(84px,13vh,112px);box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:3px solid var(--acc,#F2B544);border-radius:50%;background:#222D4E;color:#C3CBDB;font-size:12px;line-height:1.2;text-align:center}
+.hello-card h2{grid-column:2;align-self:end}
+.hello-card p{grid-column:2;align-self:start}
+.hello-btns{grid-column:1 / -1}
+.trial.lite .hello-card{column-gap:14px;padding-top:44px}
+.trial.lite .hello-photo{grid-row:1;width:76px;height:76px}
+.trial.lite .hello-card h2{align-self:center}
+.trial.lite .hello-card p{grid-column:1 / -1}
+/* the page in use: "Scroll or click to start" is a cue under the card (it still plays the opening when clicked), and the 60-second version is the card's one button.
+   The cue sits in the space already under the card, so the card and the word stay where they were; on short windows it lies on one line */
+.trial[data-opening="hello"][data-mock="none"] #sc-hi-play{display:none}
+.trial[data-opening="hello"][data-mock="none"] #sc-hi-short{background:var(--acc,#F2B544);border-color:var(--acc,#F2B544);color:#17203A}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-cue{position:absolute;left:0;right:0;bottom:clamp(2px,1vh,10px);width:max-content;margin:0 auto;padding:2px 14px}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-in{padding-bottom:calc(clamp(34px,7vh,68px) + clamp(12px,2.2vh,22px) + clamp(0px,calc(12vh - 84px),28px))}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-card{padding:clamp(16px,3.2vh,26px) 32px clamp(14px,2.8vh,22px)}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi-word{font-size:30cqw}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi-name{font-size:27px}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi-line{font-size:15px}
+.trial.lite[data-opening="hello"][data-mock="none"] #sc-hi-short{font-size:14px}
+@media (max-height:780px){.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-cue{flex-direction:row;align-items:center;gap:8px;bottom:clamp(2px,.8vh,6px)}}
+
+/* ---------- ChibiPose */
+body{margin:0}
+@keyframes chibi-pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes chibi-tilt{0%{transform:rotate(-7deg)}100%{transform:rotate(7deg)}}
+@keyframes chibi-nod{0%{transform:rotate(0deg)}100%{transform:rotate(3deg)}}
+@keyframes chibi-leg{0%{transform:rotate(-5deg)}100%{transform:rotate(5deg)}}
+@keyframes chibi-wave{0%{transform:rotate(8deg)}100%{transform:rotate(-10deg)}}
+@keyframes chibi-glance{0%,15%{transform:translateX(0)}35%,75%{transform:translateX(3px)}95%,100%{transform:translateX(0)}}
+@keyframes chibi-push{0%,12%{transform:translateY(0)}24%{transform:translateY(-2px)}36%,100%{transform:translateY(0)}}
+@keyframes chibi-flip{0%,25%{transform:scaleX(1)}65%,100%{transform:scaleX(-1)}}
+@keyframes chibi-blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.chibi-pop{transform-origin:50% 100%;animation:chibi-pop .4s ease-out both}
+.chibi-tilt{transform-box:view-box;transform-origin:70px 90px;animation:chibi-tilt 2.4s ease-in-out infinite alternate}
+.chibi-nod{transform-box:view-box;transform-origin:70px 90px;animation:chibi-nod 1.8s ease-in-out infinite alternate}
+.chibi-legl{transform-box:view-box;transform-origin:60px 128px;animation:chibi-leg 1.4s ease-in-out infinite alternate}
+.chibi-legr{transform-box:view-box;transform-origin:80px 128px;animation:chibi-leg 1.4s ease-in-out infinite alternate-reverse}
+.chibi-wave{transform-box:view-box;transform-origin:90px 103px;animation:chibi-wave .5s ease-in-out infinite alternate}
+.chibi-glance{animation:chibi-glance 3.2s ease-in-out infinite}
+.chibi-push{animation:chibi-push 3.2s ease-in-out infinite}
+.chibi-flip{transform-box:view-box;transform-origin:70px 115px;animation:chibi-flip 1.8s ease-in-out infinite}
+.chibi-blink{transform-box:view-box;transform-origin:70px 65px;animation:chibi-blink 4s linear infinite}
+@keyframes chibi-kick{0%{transform:rotate(-12deg)}100%{transform:rotate(12deg)}}
+.chibi-kickl{transform-box:view-box;transform-origin:164px 98px;animation:chibi-kick 1.1s ease-in-out infinite alternate}
+.chibi-kickr{transform-box:view-box;transform-origin:176px 98px;animation:chibi-kick 1.1s ease-in-out infinite alternate-reverse}
+.chibi-nod2{transform-box:view-box;transform-origin:64px 88px;animation:chibi-nod 1.8s ease-in-out infinite alternate}
+.chibi-blink2{transform-box:view-box;transform-origin:64px 63px;animation:chibi-blink 4s linear infinite}
+.chibi-flip2{transform-box:view-box;transform-origin:64px 99px;animation:chibi-flip 1.8s ease-in-out infinite}
+@keyframes chibi-sway{0%{transform:rotate(-3deg)}100%{transform:rotate(4deg)}}
+@keyframes chibi-tap{0%,55%{transform:rotate(0deg)}100%{transform:rotate(-10deg)}}
+.chibi-nod3{transform-box:view-box;transform-origin:46px 70px;animation:chibi-sway 2.6s ease-in-out infinite alternate}
+.chibi-blink3{transform-box:view-box;transform-origin:46px 45px;animation:chibi-blink 4s linear infinite}
+.chibi-tap{transform-box:view-box;transform-origin:96px 118px;animation:chibi-tap .9s ease-in-out infinite alternate}
+@media (prefers-reduced-motion:reduce){.chibi-nod3,.chibi-blink3,.chibi-tap{animation:none}}
+@media (prefers-reduced-motion:reduce){.chibi-kickl,.chibi-kickr,.chibi-nod2,.chibi-blink2,.chibi-flip2{animation:none}}
+@media (prefers-reduced-motion:reduce){.chibi-pop,.chibi-tilt,.chibi-nod,.chibi-legl,.chibi-legr,.chibi-wave,.chibi-glance,.chibi-push,.chibi-flip,.chibi-blink{animation:none}}
+
+/* ---------- CaseArt */
+body{margin:0}
+
+/* ---------- CheckIcon */
+body{margin:0}
+
+/* ---------- Main */
+body{margin:0}
+@keyframes chibi-pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes chibi-tilt{0%{transform:rotate(-7deg)}100%{transform:rotate(7deg)}}
+@keyframes chibi-nod{0%{transform:rotate(0deg)}100%{transform:rotate(3deg)}}
+@keyframes chibi-leg{0%{transform:rotate(-5deg)}100%{transform:rotate(5deg)}}
+@keyframes chibi-wave{0%{transform:rotate(8deg)}100%{transform:rotate(-10deg)}}
+@keyframes chibi-glance{0%,15%{transform:translateX(0)}35%,75%{transform:translateX(3px)}95%,100%{transform:translateX(0)}}
+@keyframes chibi-push{0%,12%{transform:translateY(0)}24%{transform:translateY(-2px)}36%,100%{transform:translateY(0)}}
+@keyframes chibi-flip{0%,25%{transform:scaleX(1)}65%,100%{transform:scaleX(-1)}}
+@keyframes chibi-blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.chibi-pop{transform-origin:50% 100%;animation:chibi-pop .4s ease-out both}
+.chibi-tilt{transform-box:view-box;transform-origin:70px 90px;animation:chibi-tilt 2.4s ease-in-out infinite alternate}
+.chibi-nod{transform-box:view-box;transform-origin:70px 90px;animation:chibi-nod 1.8s ease-in-out infinite alternate}
+.chibi-legl{transform-box:view-box;transform-origin:60px 128px;animation:chibi-leg 1.4s ease-in-out infinite alternate}
+.chibi-legr{transform-box:view-box;transform-origin:80px 128px;animation:chibi-leg 1.4s ease-in-out infinite alternate-reverse}
+.chibi-wave{transform-box:view-box;transform-origin:90px 103px;animation:chibi-wave .5s ease-in-out infinite alternate}
+.chibi-glance{animation:chibi-glance 3.2s ease-in-out infinite}
+.chibi-push{animation:chibi-push 3.2s ease-in-out infinite}
+.chibi-flip{transform-box:view-box;transform-origin:70px 115px;animation:chibi-flip 1.8s ease-in-out infinite}
+.chibi-blink{transform-box:view-box;transform-origin:70px 65px;animation:chibi-blink 4s linear infinite}
+@keyframes chibi-kick{0%{transform:rotate(-12deg)}100%{transform:rotate(12deg)}}
+.chibi-kickl{transform-box:view-box;transform-origin:164px 98px;animation:chibi-kick 1.1s ease-in-out infinite alternate}
+.chibi-kickr{transform-box:view-box;transform-origin:176px 98px;animation:chibi-kick 1.1s ease-in-out infinite alternate-reverse}
+.chibi-nod2{transform-box:view-box;transform-origin:64px 88px;animation:chibi-nod 1.8s ease-in-out infinite alternate}
+.chibi-blink2{transform-box:view-box;transform-origin:64px 63px;animation:chibi-blink 4s linear infinite}
+.chibi-flip2{transform-box:view-box;transform-origin:64px 99px;animation:chibi-flip 1.8s ease-in-out infinite}
+@keyframes chibi-sway{0%{transform:rotate(-3deg)}100%{transform:rotate(4deg)}}
+@keyframes chibi-tap{0%,55%{transform:rotate(0deg)}100%{transform:rotate(-10deg)}}
+.chibi-nod3{transform-box:view-box;transform-origin:46px 70px;animation:chibi-sway 2.6s ease-in-out infinite alternate}
+.chibi-blink3{transform-box:view-box;transform-origin:46px 45px;animation:chibi-blink 4s linear infinite}
+.chibi-tap{transform-box:view-box;transform-origin:96px 118px;animation:chibi-tap .9s ease-in-out infinite alternate}
+@keyframes stop-pulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.6);opacity:0}}
+.stop-pulse{animation:stop-pulse 1.4s ease-out infinite}
+.stop-dot{transition:transform .15s ease}
+.stop-btn:hover .stop-dot{transform:scale(1.25)}
+.stop-btn:focus-visible{outline:2px solid #17203A;outline-offset:2px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){.stop-pulse{animation:none}.stop-dot{transition:none}}
+@keyframes back-in{from{opacity:0;transform:translate(-50%,16px)}}
+.back-pill{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;min-width:48px;max-width:calc(100vw - 32px);padding:0 20px 0 16px;box-sizing:border-box;border-radius:999px;border:2px solid #FFFFFF;background:#17203A;color:#FFFFFF;font-family:inherit;font-size:15px;font-weight:600;white-space:nowrap;cursor:pointer;box-shadow:0 10px 24px rgba(23,32,58,.28);animation:back-in .4s cubic-bezier(.2,.7,.2,1) .7s backwards;transition:left .35s ease,transform .35s ease,padding .35s ease,gap .35s ease,background-color .18s ease,color .18s ease}
+.back-pill>span{display:block;max-width:220px;overflow:hidden;transition:max-width .35s ease,opacity .2s ease}
+/* once the visitor scrolls on, it steps aside: a small round arrow in the corner, still one tap away */
+.back-pill.small{left:16px;transform:none;padding:0;gap:0}
+.back-pill.small>span{max-width:0;opacity:0}
+.back-pill:hover{background:var(--acc,#F2B544);color:#17203A}
+.back-pill:focus-visible{outline:2px solid #17203A;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.back-pill,.back-pill>span{animation:none;transition:none}}
+@media print{.back-pill{display:none}}
+@keyframes ch-out-l{to{opacity:0;transform:translateX(-40px)}}
+@keyframes ch-out-r{to{opacity:0;transform:translateX(40px)}}
+@keyframes ch-in-r{from{opacity:0;transform:translateX(64px)}}
+@keyframes ch-in-l{from{opacity:0;transform:translateX(-64px)}}
+.ch-out-l{animation:ch-out-l .17s ease-in forwards}
+.ch-out-r{animation:ch-out-r .17s ease-in forwards}
+.ch-in-r{animation:ch-in-r .42s cubic-bezier(.2,.7,.2,1) backwards}
+.ch-in-l{animation:ch-in-l .42s cubic-bezier(.2,.7,.2,1) backwards}
+@media (prefers-reduced-motion:reduce){.ch-out-l,.ch-out-r,.ch-in-r,.ch-in-l{animation:none}}
+@keyframes hero-rise{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
+.hero-rise{animation:hero-rise .6s ease-out both}
+.hero-rise-2{animation-delay:.15s}
+.path-row{transition:transform .18s ease}
+@keyframes req-shake-a{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes req-shake-b{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.req-row{transition:border-color .15s ease,background-color .15s ease}
+@keyframes chat-in{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes typing-dot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+@keyframes tag-in{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
+.chat-in{animation:chat-in .3s ease-out both}
+.story-step{animation:chat-in .35s ease-out both}
+.typing-dot{animation:typing-dot 1s ease-in-out infinite}
+.typing-dot-2{animation-delay:.15s}
+.typing-dot-3{animation-delay:.3s}
+.tag-in{animation:tag-in .35s ease-out both}
+@media (prefers-reduced-motion:reduce){.chat-in,.story-step,.typing-dot,.tag-in{animation:none}}
+.hud{font-family:'Silkscreen',ui-monospace,'Courier New',monospace;text-transform:uppercase;letter-spacing:.04em}
+.sheet-tab{transition:transform .15s ease}
+.sheet-tab:hover,.sheet-tab:focus-visible{transform:translateY(-2px)}
+.sheet-in{animation:chat-in .3s ease-out both}
+@media (prefers-reduced-motion:reduce){.sheet-tab{transition:none}.sheet-tab:hover,.sheet-tab:focus-visible{transform:none}.sheet-in{animation:none}}
+.btn-pop{transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,color .18s ease}
+.btn-pop:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(23,32,58,.2)}
+.btn-pop:not(:disabled):active{transform:translateY(0);box-shadow:none}
+.btn-flip:not(:disabled):hover{background:var(--acc,#F2B544)!important;color:#17203A!important}
+.link-pop:hover{text-decoration-color:var(--acc,#F2B544)!important;text-decoration-thickness:2px!important}
+.nav-link{position:relative}
+.nav-link::after{content:"";position:absolute;left:12px;right:12px;bottom:9px;height:2px;border-radius:2px;background:var(--acc,#F2B544);transform:scaleX(0);transform-origin:left center;transition:transform .22s ease}
+.nav-link:hover::after,.nav-link:focus-visible::after{transform:scaleX(1)}
+.nav-link[aria-pressed="true"]::after{display:none}
+.card-pop{transition:transform .22s ease,box-shadow .22s ease}
+.card-pop:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(23,32,58,.12)}
+.case-row{transition:box-shadow .22s ease,border-color .22s ease;container-type:inline-size}
+@container (max-width: 520px){.case-img{flex:0 0 108px !important;width:108px !important;height:72px !important}}
+.case-row:hover{border-color:#8A93A3!important;box-shadow:0 10px 24px rgba(23,32,58,.08)}
+/* the top of a project row is one big control: a click anywhere on it reaches the button inside */
+.case-head{cursor:pointer}
+/* the three rounds of the sprint activity: numbered steps on a line, so they read as progress and not as tabs */
+.step-li{display:inline-flex;align-items:center;gap:8px;min-height:32px;font-size:14px}
+.step-n{flex:0 0 24px;width:24px;height:24px;box-sizing:border-box;border-radius:50%;border:1.5px solid;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.step-li.step-next::after{content:"";flex:0 0 22px;width:22px;height:2px;margin-left:4px;border-radius:1px;background:#C9CFD9}
+.step-li.step-done.step-next::after{background:#17203A}
+.case-img>*{transition:transform .4s ease}
+.case-row:hover .case-img>*{transform:scale(1.07) rotate(-1.5deg)}
+.slot-hi{transition:border-color .15s ease}
+.slot-hi:hover{border-color:var(--acc,#F2B544)!important}
+.cert-star{transition:transform .35s ease}
+.cert-tile:hover .cert-star{transform:rotate(72deg) scale(1.12)}
+@keyframes chibi-hop{0%,100%{transform:translateY(0)}35%{transform:translateY(-12px)}65%{transform:translateY(0)}82%{transform:translateY(-4px)}}
+.chibi-hop:hover{animation:chibi-hop .55s ease}
+@keyframes rv-rise{from{opacity:0;transform:translateY(22px)}}
+.rv-on .rv:not(.rv-in){opacity:0}
+.rv-on .rv.rv-in{animation:rv-rise .6s cubic-bezier(.2,.7,.2,1) backwards}
+.rv-on .rv-stagger>.rv.rv-in:nth-child(2){animation-delay:.08s}
+.rv-on .rv-stagger>.rv.rv-in:nth-child(3){animation-delay:.16s}
+.rv-on .rv-stagger>.rv.rv-in:nth-child(4){animation-delay:.24s}
+@keyframes xp-fill{from{background:#36426A;transform:scaleY(.4)}}
+.rv-on .xp-row.rv-in .xp-seg{animation:xp-fill .3s ease backwards}
+.rv-on .xp-row.rv-in .xp-seg:nth-child(1){animation-delay:0.39s}.rv-on .xp-row.rv-in .xp-seg:nth-child(2){animation-delay:0.48s}.rv-on .xp-row.rv-in .xp-seg:nth-child(3){animation-delay:0.57s}.rv-on .xp-row.rv-in .xp-seg:nth-child(4){animation-delay:0.66s}.rv-on .xp-row.rv-in .xp-seg:nth-child(5){animation-delay:0.75s}.rv-on .xp-row.rv-in .xp-seg:nth-child(6){animation-delay:0.84s}.rv-on .xp-row.rv-in .xp-seg:nth-child(7){animation-delay:0.93s}.rv-on .xp-row.rv-in .xp-seg:nth-child(8){animation-delay:1.02s}
+@keyframes lv-pop{from{opacity:0;transform:scale(.3) rotate(-12deg)}}
+.rv-on .rv-in .lv-pop{animation:lv-pop .5s cubic-bezier(.3,1.5,.5,1) .5s backwards}
+@keyframes seg-grow{from{transform:scaleX(0)}}
+.lang-seg{transform-origin:left center;animation:seg-grow .45s ease backwards}
+.lang-seg:nth-child(2){animation-delay:.15s}
+.lang-seg:nth-child(3){animation-delay:.3s}
+@media (prefers-reduced-motion:reduce){.btn-pop,.card-pop,.case-row,.case-img>*,.cert-star,.slot-hi,.nav-link::after{transition:none}.btn-pop:not(:disabled):hover,.card-pop:hover,.case-row:hover .case-img>*,.cert-tile:hover .cert-star{transform:none}.chibi-hop:hover,.lang-seg{animation:none}.rv-on .rv:not(.rv-in){opacity:1}.rv-on .rv.rv-in,.rv-on .xp-row.rv-in .xp-seg,.rv-on .rv-in .lv-pop{animation:none}}
+@media print{.rv-on .rv:not(.rv-in){opacity:1}}
+.h-two{display:flex;flex-direction:column;align-items:flex-start;gap:.08em}
+.h-lead{font-size:.54em;line-height:1.2;letter-spacing:0}
+.h-mark{margin-left:-.14em;padding:0 .14em;border-radius:.14em;background:var(--acc,#F2B544);color:#17203A}
+.feat-wrap{container:feat / inline-size}
+.feat-card{display:flex;flex-direction:column}
+.feat-art{display:flex;align-items:center;justify-content:center;padding:14px 0}
+.feat-art-in{display:block;width:180px}
+.feat-body{flex:1 1 auto;display:flex;flex-direction:column;gap:6px;padding:18px 20px 20px}
+/* the key fact on a project: one supporting sentence under the title, with the keyword in bold on a yellow marker */
+.fact{display:block;margin:0;font-size:16px;line-height:1.5;color:#5B6472}
+.fact b{font-weight:700;color:#17203A;padding:0 2px;margin-left:-2px;border-radius:2px;background:linear-gradient(transparent 42%,var(--acc,#F2B544) 42%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+/* the numbers strip: four equal columns, centred, two by two on narrow screens */
+.nums-wrap{container-type:inline-size}
+.nums{max-width:1120px;margin:0 auto;padding:56px 24px;box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px 24px}
+.nums>div{min-width:0;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.nums-n{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(52px,6.4cqw,76px);line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.nums-l{max-width:22ch;font-size:16px;line-height:1.4;color:#C3CBDB}
+@container (max-width: 700px){.nums{grid-template-columns:repeat(2,minmax(0,1fr));padding:44px 20px}.nums-l{font-size:15px}}
+@container feat (max-width: 700px){.feat-card{flex-direction:row;align-items:stretch}.feat-art{flex:0 0 108px;padding:0 4px}.feat-art-in{width:100px}.feat-body{flex:1 1 0;min-width:0;padding:14px 16px}}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes ty-a{from{opacity:0}}
+@keyframes ty-b{from{opacity:0}}
+.ty-a{animation:ty-a 1ms linear backwards}
+.ty-b{animation:ty-b 1ms linear backwards}
+.rv-on .rv:not(.rv-in) .ty{animation:none}
+.rv-on .rv.rv-now,.rv-on .rv.rv-now .xp-seg,.rv-on .xp-row.rv-now .xp-seg,.rv-on .rv.rv-now .lv-pop,.rv-on .rv.rv-now .ty{animation:none}
+@media (prefers-reduced-motion:reduce){.ty{animation:none}}
+.sprint-bar{display:none}
+@container (max-width: 880px){.sprint-bar{display:flex}}
+.req-shake-a{animation:req-shake-a .35s ease}
+.req-shake-b{animation:req-shake-b .35s ease}
+@media (prefers-reduced-motion:reduce){.req-row{transition:none}.req-shake-a,.req-shake-b{animation:none}}
+/* AI thinking: a chat you review one message at a time */
+.ai-phone{width:min(100%,340px);height:440px;box-sizing:border-box;border-radius:38px;border:8px solid #17203A;background:#F1F3F6;overflow:hidden;display:flex;flex-direction:column}
+.ai-phone-top{flex:0 0 54px;display:flex;align-items:center;gap:10px;padding:0 16px;background:#FFFFFF;border-bottom:1px solid #E1E5EB;font-size:15px;font-weight:600}
+.ai-phone-body{position:relative;flex:1 1 auto;min-height:0;overflow:hidden;padding:16px 14px 8px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;gap:10px}
+/* a spacer after the messages takes any spare room, so a new chat starts at the top; once the chat is full the newest message stays in view at the bottom */
+.ai-phone-body::after{content:"";flex:1 1 0;min-height:0}
+.ai-phone-body:has(.ai-stamp){padding-bottom:18px}
+.ai-phone-body:has(.ai-stamp)::after{display:none}
+.ai-msg{flex:0 0 auto;display:flex;align-items:flex-end;gap:8px;transition:opacity .25s ease}
+.ai-msg.cu{justify-content:flex-end}
+.ai-msg.sys{justify-content:center}
+.ai-msg.old{opacity:.38}
+.ai-av{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:#17203A;color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.ai-bub{max-width:84%;padding:10px 14px;box-sizing:border-box;border-radius:18px;font-size:16px;line-height:1.4;display:flex;flex-direction:column;align-items:flex-start;gap:6px;transition:background-color .25s ease,border-color .25s ease}
+.ai-msg.cu .ai-bub{background:#17203A;color:#FFFFFF;border-radius:18px 18px 4px 18px}
+.ai-msg.ai .ai-bub{background:#FFFFFF;border:2px solid #FFFFFF;border-radius:18px 18px 18px 4px}
+.ai-msg.sys .ai-bub{max-width:100%;padding:8px 14px;border:2px dashed #8A93A3;border-radius:14px;font-size:14px;font-weight:500;color:#4A5362;align-items:center;text-align:center}
+.ai-msg.flag .ai-bub{border-style:solid;border-color:var(--acc,#F2B544);background:#FFF6E0}
+.ai-msg.fixed .ai-bub{border-style:solid;border-color:#DCE6F5;background:#DCE6F5;color:#17203A;animation:ai-fix .5s ease-out both}
+.ai-msg.old.fixed .ai-bub{animation:none}
+@keyframes ai-fix{0%{transform:scale(.96);background:#F2B544}60%{transform:scale(1.020)}100%{transform:scale(1)}}
+.ai-tag{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.ai-tag-f{background:var(--acc,#F2B544);color:#17203A}
+.ai-tag-x{background:#17203A;color:#FFFFFF}
+.ai-stamp{position:absolute;left:50%;top:22px;transform:translateX(-50%) rotate(-4deg);display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;border:2px solid #17203A;background:#FFFFFF;font-size:15px;font-weight:700;color:#17203A;white-space:nowrap}
+.ai-found{align-self:stretch;display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#C3CBDB}
+.ai-found>span:first-child{margin-right:4px}
+.ai-dot{flex:0 0 36px;width:36px;height:36px;box-sizing:border-box;border-radius:50%;border:2px solid #36426A;color:#8A93A3;display:inline-flex;align-items:center;justify-content:center;transition:background-color .25s ease,border-color .25s ease,color .25s ease}
+.ai-dot.on{border-color:var(--acc,#F2B544);background:var(--acc,#F2B544);color:#17203A}
+.ai-dot.miss{border-color:#C3CBDB;color:#FFFFFF}
+.ai-ic{display:block;width:18px;height:18px}
+.ai-ic dc-import{display:block}
+.ai-eb{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C3CBDB}
+.ai-fact{align-self:stretch;display:flex;align-items:center;gap:12px;padding:14px 16px;box-sizing:border-box;border-radius:14px;background:#FFF6E0;color:#17203A;font-size:17px;line-height:1.35}
+.ai-fact svg{flex:0 0 18px}
+.ai-fact>span{display:flex;flex-direction:column}
+.ai-fact b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5B6472}
+.ai-bigs{align-self:stretch;display:flex;flex-wrap:wrap;gap:12px}
+.ai-big{flex:1 1 150px;min-height:60px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:18px;border:2px solid #FFFFFF;background:transparent;color:#FFFFFF;font-family:inherit;font-size:18px;font-weight:700;cursor:pointer;transition:transform .15s ease,background-color .15s ease,color .15s ease}
+.ai-big:hover,.ai-big:focus-visible{transform:translateY(-2px);background:#FFFFFF;color:#17203A}
+.ai-big-flag,.ai-big-flag:hover,.ai-big-flag:focus-visible{border-color:var(--acc,#F2B544);background:var(--acc,#F2B544);color:#17203A}
+.ai-cks{align-self:stretch;display:flex;flex-wrap:wrap;gap:10px}
+.ai-ck{min-height:52px;padding:0 18px;box-sizing:border-box;display:inline-flex;align-items:center;gap:10px;border-radius:16px;border:1px solid #36426A;background:#222D4E;color:#FFFFFF;font-family:inherit;font-size:17px;font-weight:600;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.ai-ck:hover,.ai-ck:focus-visible{transform:translateY(-2px);border-color:var(--acc,#F2B544)}
+.ai-ck .ai-ic{width:22px;height:22px;color:var(--acc,#F2B544)}
+.ai-lit{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 20px;box-sizing:border-box;border-radius:16px;background:var(--acc,#F2B544);color:#17203A;font-size:19px;font-weight:700;animation:chat-in .3s ease-out both}
+.ai-lit .ai-ic{width:24px;height:24px}
+.ai-flaw{margin:0;font-size:16px;line-height:1.4;color:#C3CBDB}
+.ai-rule{margin:0;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:28px;line-height:1.2;animation:chat-in .35s ease-out both}
+.ai-you{margin:0;font-size:15px;font-weight:600;line-height:1.4;color:#C3CBDB}
+.ai-list{align-self:stretch;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.ai-list li{display:flex;align-items:center;gap:12px;font-size:16px;line-height:1.35}
+.ai-list b{flex:0 0 98px;font-size:15px}
+.ai-list li>span:last-child{color:#C3CBDB}
+/* narrow screens: the chat window hugs its messages instead of holding an empty screen, and stops growing at 340px */
+@container (max-width: 700px){.ai-phone{height:auto;max-height:340px}.ai-found>span:first-child{flex:1 0 100%}
+/* keep each step to one screen: only the current exchange shows, the two calls sit side by side, the five checks become a compact grid */
+.ai-msg.old{display:none}.ai-bigs{flex-wrap:nowrap;gap:10px}.ai-big{flex:1 1 0;min-width:0;min-height:56px;font-size:17px}.ai-cks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.ai-ck{flex-direction:column;justify-content:center;gap:6px;min-height:66px;padding:8px 4px;border-radius:14px;font-size:clamp(12px,4.2cqw,13px)}.ai-rule{font-size:24px}.ai-phone{border-width:6px;border-radius:32px}.ai-phone-top{flex-basis:46px}.ai-phone-body{padding:12px 12px 4px}.ai-lit{min-height:46px;font-size:17px}
+/* the closing checklist: name and rule run together beside the icon, and the row of found checks steps aside since the list repeats it */
+.ai-list{gap:8px}.ai-list li{display:block;position:relative;min-height:36px;padding-left:48px;font-size:15px;line-height:1.3;align-content:center}.ai-list li>.ai-dot{position:absolute;left:0;top:0}.ai-list b{margin-right:6px}#game-panel:has(.ai-list) .ai-found{display:none}}
+@media (prefers-reduced-motion:reduce){.ai-msg,.ai-bub,.ai-dot,.ai-big,.ai-ck{transition:none}.ai-msg.fixed .ai-bub,.ai-lit,.ai-rule{animation:none}}
+.path-row:hover,.path-row:focus-visible{transform:translateX(6px)}
+@media (prefers-reduced-motion:reduce){.hero-rise{animation:none}.path-row{transition:none}.path-row:hover,.path-row:focus-visible{transform:none}}
+@media (prefers-reduced-motion:reduce){.chibi-nod3,.chibi-blink3,.chibi-tap{animation:none}}
+@media (prefers-reduced-motion:reduce){.chibi-kickl,.chibi-kickr,.chibi-nod2,.chibi-blink2,.chibi-flip2{animation:none}}
+@media (prefers-reduced-motion:reduce){.chibi-pop,.chibi-tilt,.chibi-nod,.chibi-legl,.chibi-legr,.chibi-wave,.chibi-glance,.chibi-push,.chibi-flip,.chibi-blink{animation:none}}
+
+/* ---------- site only */
+@supports (height:100dvh){#dc-root .trial{height:100dvh !important}}
