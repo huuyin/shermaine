@@ -189,7 +189,9 @@ class Component extends DCLogic {
         hint.style.visibility = cue < 0.02 ? 'hidden' : 'visible';   // once faded it must not catch clicks or focus
 
         const seat = clamp(vh * 0.076, 44, 68);
-        panel.style.height = (seat + (vh * 0.44 - seat) * pathsIn).toFixed(1) + 'px';
+        // the open panel is only as tall as the question and the three paths need (at most 44vh), so tall screens get no empty gap
+        const full = Math.max(seat, Math.min(vh * 0.44, paths.offsetHeight));
+        panel.style.height = (seat + (full - seat) * pathsIn).toFixed(1) + 'px';
         paths.style.opacity = ease(seg(pathsIn, 0.3, 1)).toFixed(3);
         // the seat's own label gives way as the paths arrive, and stays hidden wherever it would run into the chibi
         tip.style.opacity = (1 - seg(pathsIn, 0, 0.35)).toFixed(3);
