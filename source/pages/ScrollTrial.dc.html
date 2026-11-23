@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Portfolio, laptop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&amp;display=swap">
+<style>
+body{margin:0}
+.trial{position:relative;container:trial / inline-size;scrollbar-width:thin}
+.sx,.sx *{box-sizing:border-box}
+.serif{font-family:'Playfair Display',Georgia,serif;font-weight:700}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- scene 1: the hero holds still while the scroll plays it. One value drives every moving part. */
+.sc-hero{position:relative;height:420vh}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#FCFCFC}
+.top{position:absolute;left:0;right:0;top:0;z-index:4;height:clamp(56px,9vh,76px);padding:0 6cqw;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.top-nav{display:flex;align-items:center;gap:8px}
+.top-nav button{display:inline-flex;align-items:center;min-height:clamp(36px,5.4vh,44px);padding:0 12px;border:0;background:transparent;color:#030711;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer}
+.top-nav button:hover{text-decoration:underline;text-underline-offset:6px}
+.top-nav .talk{padding:0 20px;margin-left:8px;border-radius:999px;background:#17203A;color:#FFFFFF;font-weight:600;transition:background-color .18s ease,color .18s ease}
+.top-nav .talk:hover{background:var(--acc,#F2B544);color:#17203A;text-decoration:none}
+.tape{--cw:calc(clamp(104px,25.5vh,230px) * .8235 + 36px + 6cqw);position:absolute;left:0;right:0;top:0;height:calc(49% - 10px);z-index:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - var(--cw) - 72px),transparent calc(100% - var(--cw) - 8px));mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - var(--cw) - 72px),transparent calc(100% - var(--cw) - 8px))}
+.track{position:absolute;left:0;bottom:0;white-space:nowrap;font-size:max(40px,min(12.4vh,7.8cqw));line-height:1.1;letter-spacing:-.02em;will-change:transform}
+.ph{display:inline-flex;flex-direction:column;align-items:flex-start;gap:clamp(8px,1.6vh,14px);vertical-align:bottom;margin-right:34cqw}
+.ph-key .ph-t{font-size:1.16em}
+.tg{display:inline-flex;align-items:center;gap:8px;height:clamp(28px,4.2vh,34px);padding:0 14px;border-radius:999px;background:#F1F3F6;font-family:Inter,system-ui,sans-serif;font-size:15px;font-weight:500;line-height:1;letter-spacing:0;color:#5B6472;white-space:nowrap}
+.tg i{display:block;width:8px;height:8px;border-radius:50%;background:var(--acc,#F2B544)}
+.tg b{font-weight:700;color:#17203A}
+.mark{display:inline-block;padding:0 .16em;border-radius:.14em;background:var(--acc,#F2B544);color:#17203A}
+/* the floor line: the headline stands on it, it runs into the chibi's seat and fills as you scroll */
+.floor{position:absolute;left:6cqw;right:calc(6cqw + min(34cqw,480px) - 24px);top:49%;z-index:1;height:3px;border-radius:2px;background:#E1E5EB;overflow:hidden}
+.floor i{display:block;width:100%;height:100%;background:#17203A;transform-origin:left center;transform:scaleX(.333)}
+.short-go{position:absolute;left:6cqw;bottom:7%;z-index:2;min-height:44px;padding:0;border:0;background:transparent;color:#17203A;font-family:inherit;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.short-go:hover{text-decoration-color:var(--acc,#F2B544);text-decoration-thickness:2px}
+/* the scroll cue on the first screen: a little mouse with a rolling wheel and a plain instruction, bottom centre. It fades out once the scroll starts.
+   It is also a button: a click plays the opening for anyone who does not scroll */
+.hint{position:absolute;left:50%;bottom:clamp(8px,calc(5vh - 8px),36px);z-index:2;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 14px;border:0;border-radius:16px;background:transparent;font-family:inherit;font-size:17px;font-weight:700;line-height:1.2;color:#17203A;white-space:nowrap;cursor:pointer}
+.hint:focus-visible{outline:3px solid var(--acc,#F2B544);outline-offset:2px}
+.hint-mouse{transition:background-color .18s ease}
+.hint:hover .hint-mouse,.hint:focus-visible .hint-mouse{background:#FFF6E0}
+.hint-mouse{position:relative;width:34px;height:54px;border:3px solid #17203A;border-radius:17px}
+.hint-mouse i{position:absolute;left:50%;top:8px;width:6px;height:11px;margin-left:-3px;border-radius:3px;background:var(--acc,#F2B544);box-shadow:0 0 0 1.5px #17203A;animation:hint-wheel 1.6s ease-in-out infinite}
+@keyframes hint-wheel{0%{transform:translateY(0);opacity:0}20%{opacity:1}70%{transform:translateY(18px);opacity:1}100%{transform:translateY(18px);opacity:0}}
+@keyframes hint-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.hint svg{margin-top:-6px;animation:hint-bob 1.6s ease-in-out infinite}
+/* touch screens get the same cue in their own words */
+.hint-coarse{display:none}
+@media (pointer:coarse){.hint-mouse,.hint-fine{display:none}.hint-coarse{display:inline}}
+/* on narrow windows the centre would run into the 60-second link, so the cue moves to the right */
+@container trial (max-width: 920px){.hint{left:auto;right:calc(6cqw - 14px);transform:none}}
+.panel{--ch:clamp(104px,25.5vh,230px);position:absolute;right:6cqw;top:49%;z-index:3;width:min(34cqw,480px);height:clamp(44px,7.6vh,68px);border-radius:clamp(16px,2.8vh,24px);background:#17203A;color:#FFFFFF}
+.panel-in{position:absolute;inset:0;overflow:hidden;border-radius:inherit}
+/* before the seat opens it says what it is about to become, so it does not read as an empty box */
+.seat-tip{position:absolute;left:22px;top:0;height:clamp(44px,7.6vh,68px);display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C3CBDB;white-space:nowrap;pointer-events:none}
+.chibi{position:absolute;right:36px;top:calc(var(--ch) * -.765);width:calc(var(--ch) * .8235);height:var(--ch);z-index:2;pointer-events:none;will-change:transform}
+.pose{position:absolute;inset:0;opacity:0;transition:opacity .16s linear}
+.pose.on{opacity:1}
+.bubble{position:absolute;right:86px;bottom:calc(100% + var(--ch) * .765 + 10px);width:min(300px,30cqw);height:0}
+.say{position:absolute;right:0;bottom:0;max-width:100%;padding:clamp(8px,1.5vh,12px) 16px;border-radius:18px 18px 4px 18px;background:#FFFFFF;border:2px solid #17203A;color:#17203A;font-size:clamp(14px,2.1vh,17px);font-weight:600;line-height:1.4;opacity:0;transform-origin:100% 100%;will-change:transform,opacity}
+.hl{padding:0 2px;border-radius:2px;background:linear-gradient(transparent 42%,var(--acc,#F2B544) 42%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.say:first-child{opacity:1}
+/* the "hello first" opening (data-opening="hello"): the page opens on the amber Hello scene, then the numbers banner, then the story.
+   Both are ordinary sections that scroll away, so the first move a visitor makes is plain scrolling. Without the option they stay out of the page */
+.hi{--ch:clamp(104px,25.5vh,230px);position:relative;z-index:2;height:100vh;overflow:hidden;border-radius:0 0 50% 50% / 0 0 9vh 9vh;background:var(--acc,#F2B544);color:#17203A}
+.hi-in{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:0 24px clamp(34px,7vh,68px);box-sizing:border-box}
+/* the numbers banner: the four figures a recruiter should see before the story. It tucks under the curved hem of the Hello scene */
+.n2{position:relative;z-index:1;margin-top:-9vh;padding:calc(9vh + clamp(34px,6.5vh,60px)) 24px clamp(38px,7vh,64px);background:#17203A;color:#FFFFFF}
+.n2-in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px}
+.n2-i{min-width:0;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.n2-n{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(52px,6.4cqw,76px);line-height:1;font-variant-numeric:lining-nums tabular-nums;color:var(--acc,#F2B544)}
+.n2-l{max-width:22ch;font-size:16px;line-height:1.4;color:#C3CBDB}
+@container trial (max-width: 700px){.n2-in{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* over the Hello scene the menu takes the scene's own colour, so the big word passes under it cleanly */
+.trial:not(.lite) .bar.on-hi:not(.solid){background:var(--acc,#F2B544)}
+.hi-word{position:absolute;left:0;right:0;top:min(11vh,calc(32vh - 147px));text-align:center;white-space:nowrap;font-size:min(26.5cqw,42vh);line-height:.9;letter-spacing:-.03em;pointer-events:none}
+.hi-card{position:relative;z-index:1;width:min(100%,580px);padding:clamp(20px,4vh,34px) 32px clamp(18px,3.6vh,30px);box-sizing:border-box;border-radius:28px;background:#17203A;color:#FFFFFF;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(6px,1.3vh,12px)}
+.hi-chibi{position:absolute;right:32px;top:calc(var(--ch) * -.765);width:calc(var(--ch) * .8235);height:var(--ch);pointer-events:none}
+.hi-name{margin:0;font-size:clamp(26px,min(4cqw,5.6vh),40px);line-height:1.15;letter-spacing:-.01em}
+.hi-line{margin:0;font-size:clamp(15px,2.2vh,18px);line-height:1.5;color:#C3CBDB;text-wrap:balance}
+.hi-line b{font-weight:700;color:var(--acc,#F2B544)}
+/* the AI skills are one quiet list inside the card: plain words with a small dot. No boxes, so they do not read as buttons,
+   and all in one place, so the screen has a single thing to look at after the word */
+.hi-skills{align-self:stretch;display:flex;flex-direction:column;gap:clamp(6px,1.1vh,9px);margin-top:clamp(4px,1vh,10px);padding-top:clamp(10px,1.9vh,16px);border-top:1px solid #36426A}
+.hi-label{font-size:12px;color:#C3CBDB}
+.hi-proof{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+.hi-pf{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;width:100%;min-height:clamp(22px,3.1vh,28px);padding:0;border:0;background:transparent;color:#FFFFFF;font-family:inherit;text-align:left;cursor:pointer}
+.hi-pf b{display:inline-flex;align-items:center;gap:8px;font-size:clamp(14px,2vh,16px);font-weight:600;line-height:1.35;white-space:nowrap}
+.hi-pf b::before{content:"";flex:0 0 6px;width:6px;height:6px;border-radius:50%;background:var(--acc,#F2B544)}
+.hi-pf span{font-size:clamp(13px,1.85vh,15px);line-height:1.35;color:#C3CBDB}
+.hi-pf:hover b,.hi-pf:focus-visible b{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--acc,#F2B544)}
+/* the two real actions of the first screen are the only buttons on it, inside the card: start the story, or take the 60-second version.
+   So the loose scroll cue is not needed here, and the 60-second link at the bottom left waits under the curtain for the story screens */
+.hi-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(6px,1.5vh,14px)}
+.hi-btns .btn{font-family:inherit;white-space:nowrap;cursor:pointer}
+.hi-btns .btn:focus-visible{outline:3px solid #FFFFFF;outline-offset:2px}
+.hi-play svg{animation:hint-bob 1.6s ease-in-out infinite}
+.trial[data-opening="hello"]:not(.lite) .hint{display:none}
+.trial.calm .hi-play svg{animation:none}
+@media (prefers-reduced-motion:reduce){.hi-play svg{animation:none}}
+/* a calm entrance when the page loads, in two moves only: the word eases in, then the card rises as one piece.
+   Nothing inside the card moves on its own, so there is one thing to follow at a time. It is slow and short in distance on purpose, so it drifts in rather than rushes. It plays once */
+@keyframes hi-word-in{from{opacity:0;transform:translateY(16px)}}
+@keyframes hi-rise{from{opacity:0;transform:translateY(20px)}}
+/* the entrance: the word fades in while settling from slightly larger, then the card (with the chibi on it) slides up from below, then the start cue fades in.
+   Slow, three steps, and the word and the card deliberately arrive in different ways.
+   It starts when the script adds hi-go, which it does once the Hello screen is really on screen; until then hi-wait keeps the three out of sight */
+@keyframes hi-in-word{from{opacity:0;transform:scale(1.07)}}
+@keyframes hi-in-card{from{opacity:0;transform:translateY(64px)}}
+@keyframes hi-in-cue{from{opacity:0}}
+.trial.hi-wait .hi-word,.trial.hi-wait .hi-card,.trial.hi-wait .hi-cue{opacity:0;animation:none}
+.trial.hi-go .hi-word{animation:hi-in-word 2s cubic-bezier(.22,.6,.25,1) .15s backwards}
+.trial.hi-go .hi-card{animation:hi-in-card 1.7s cubic-bezier(.22,.6,.25,1) 1s backwards}
+.trial.hi-go .hi-cue{animation:hi-in-cue 1.2s ease-out 2.5s backwards}
+.trial.calm .hi-word,.trial.calm .hi-card,.trial.calm .hi-cue{opacity:1 !important;animation:none !important}
+@media print{.hi-word,.hi-card,.hi-cue{opacity:1 !important;animation:none !important}}
+@media (prefers-reduced-motion:reduce){.hi-word,.hi-card{animation:none}}
+.say:last-child{text-wrap:balance}
+.paths{position:absolute;left:0;right:0;top:0;height:44vh;padding:calc(var(--ch) * .28) 24px clamp(12px,2.6vh,22px);display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(5px,1.1vh,10px);opacity:0;visibility:hidden;pointer-events:none;will-change:opacity}
+.paths-q{margin-bottom:auto;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(16px,3.3vh,28px);line-height:1.2}
+.path{display:flex;align-items:center;gap:12px;min-height:clamp(34px,6.8vh,60px);padding:clamp(4px,1.1vh,10px) 16px;border-radius:clamp(10px,1.8vh,16px);border:1px solid #36426A;background:#222D4E;color:#FFFFFF;font-family:inherit;text-align:left;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background-color .18s ease,box-shadow .18s ease}
+.path:hover,.path.lit{transform:translateX(6px);border-color:var(--acc,#F2B544)}
+.path.lit{background:#2B3862;box-shadow:0 0 0 1px var(--acc,#F2B544)}
+.paths:hover .path.lit:not(:hover){transform:none;border-color:#36426A;background:#222D4E;box-shadow:none}
+.path-t{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.path b{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(14px,2.5vh,19px);line-height:1.25}
+.path small{font-size:14px;line-height:1.35;color:#C3CBDB}
+.trial.tight .path small{display:none}
+.path svg{flex:0 0 18px;color:var(--acc,#F2B544)}
+
+/* the circle that grows out of the panel: amber leads, navy follows and already carries the next heading */
+.wipe{position:absolute;inset:0;clip-path:circle(0px at 80% 60%);pointer-events:none}
+.wipe-lead{z-index:6;background:var(--acc,#F2B544)}
+.wipe-main{z-index:7;overflow:hidden;background:#17203A;color:#FFFFFF}
+.band{position:absolute;left:0;top:9vh;white-space:nowrap;font-size:min(25cqw,44vh);line-height:1;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px #46548A;will-change:transform;pointer-events:none}
+.work-head{position:absolute;left:0;right:0;bottom:calc(12vh + clamp(16px,3vh,28px))}
+.work-in{position:relative;max-width:1120px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:clamp(12px,2.6vh,24px)}
+.lines{margin:0;font-size:clamp(34px,min(6.4cqw,10vh),80px);line-height:1.08;letter-spacing:-.015em}
+.ln{display:block;overflow:hidden;padding-bottom:.08em}
+.ln>span{display:block;transform:translateY(108%);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.ln:nth-child(2)>span{transition-delay:.12s}
+.lines.in .ln>span{transform:none}
+
+/* ---------- scene 2: the cards carry on from the heading the circle revealed */
+/* one menu for the whole page. It takes no room: it floats over the top edge.
+   Wide screens: it is there from the first screen, see-through over the opening, and turns into a solid strip the moment the wipe or the page passes under it.
+   Because it never comes and goes, nothing can double up or pop while scrolling either way.
+   Phones: it appears once the opening is behind you, steps aside while you scroll down and comes back when you scroll up */
+.bar-wrap{position:sticky;top:0;z-index:6;height:0}
+.bar{position:absolute;left:0;right:0;top:0;height:56px;padding:0 6cqw;display:flex;align-items:center;justify-content:space-between;gap:16px;background:#FCFCFC;border-bottom:1px solid #E1E5EB;box-shadow:0 6px 18px rgba(23,32,58,.06);transform:translateY(-120%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s}
+.bar.on{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+.bar button{border:0;background:transparent;font-family:inherit;color:#030711;cursor:pointer}
+.bar .bar-name{padding:0;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:22px;white-space:nowrap}
+.bar-left{display:flex;align-items:center;gap:18px;min-width:0}
+/* the way back after a button inside the page took the visitor somewhere else. On wide screens it lives here, in the menu, where it covers nothing;
+   on phones the page inside shows its own floating button instead */
+@keyframes bar-back-in{from{opacity:0;transform:translateX(-12px)}}
+/* a short call for attention when it arrives: two soft pulses, then it rests, so it is noticed without nagging while people read */
+@keyframes bar-back-call{0%{box-shadow:0 0 0 0 rgba(23,32,58,.5);transform:scale(1)}28%{transform:scale(1.08)}56%{transform:scale(1)}100%{box-shadow:0 0 0 16px rgba(23,32,58,0);transform:scale(1)}}
+.bar .bar-back{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px 0 10px;border-radius:999px;background:var(--acc,#F2B544);color:#17203A;font-size:14px;font-weight:600;white-space:nowrap;animation:bar-back-in .4s cubic-bezier(.2,.7,.2,1) .5s backwards,bar-back-call 1.3s ease-out 1.1s 2;transition:background-color .18s ease,color .18s ease}
+.bar .bar-back:hover{background:#17203A;color:#FFFFFF}
+.bar .bar-back[hidden],.trial.lite .bar .bar-back{display:none}
+.bar-back-t::after{content:attr(data-label)}
+@container trial (max-width: 1040px){.bar-back-t::after{content:"Back"}}
+.trial:not(.lite) .trial-main .back-pill{display:none}
+.trial.calm .bar .bar-back{animation:none}
+/* "Let's talk" jumps to the end of the page from wherever the visitor is. The way back is the same button: in the menu on wide screens,
+   and on phones this floating one, which shrinks to a round arrow in the corner once they scroll on */
+.spot-wrap{position:sticky;bottom:0;z-index:5;height:0}
+@keyframes spot-in{from{opacity:0;transform:translate(-50%,16px)}}
+.spot-pill{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;min-width:48px;padding:0 20px 0 16px;box-sizing:border-box;border-radius:999px;border:2px solid #FFFFFF;background:#17203A;color:#FFFFFF;font-family:inherit;font-size:15px;font-weight:600;white-space:nowrap;cursor:pointer;box-shadow:0 10px 24px rgba(23,32,58,.28);animation:spot-in .4s cubic-bezier(.2,.7,.2,1) .7s backwards;transition:left .35s ease,transform .35s ease,padding .35s ease,gap .35s ease}
+.spot-pill>span{display:block;max-width:240px;overflow:hidden;transition:max-width .35s ease,opacity .2s ease}
+.spot-pill.small{left:16px;transform:none;padding:0;gap:0}
+.spot-pill.small>span{max-width:0;opacity:0}
+.spot-pill[hidden],.trial:not(.lite) .spot-pill{display:none}
+.trial.has-spot .trial-main .back-pill{display:none}
+.trial.calm .spot-pill,.trial.calm .spot-pill>span{animation:none;transition:none}
+.bar-links{display:flex;align-items:center;gap:4px}
+.bar-go{min-height:40px;padding:0 12px;font-size:15px;font-weight:500;white-space:nowrap}
+.bar-go:hover{text-decoration:underline;text-underline-offset:6px}
+.bar-go[aria-current="true"]{font-weight:700;text-decoration:underline;text-decoration-color:var(--acc,#F2B544);text-decoration-thickness:3px;text-underline-offset:6px}
+.bar .bar-talk{min-height:40px;margin-left:8px;padding:0 18px;border-radius:999px;background:#17203A;color:#FFFFFF;font-size:15px;font-weight:600;white-space:nowrap;transition:background-color .18s ease,color .18s ease}
+.bar .bar-talk:hover{background:var(--acc,#F2B544);color:#17203A}
+.trial:not(.lite) .top{visibility:hidden}
+.trial:not(.lite) .bar{height:clamp(56px,8vh,64px);gap:24px;transform:none;visibility:visible;transition:border-color .2s ease,box-shadow .2s ease}
+.trial:not(.lite) .bar:not(.solid){background:transparent;border-bottom-color:transparent;box-shadow:none}
+.trial:not(.lite) .bar-links{gap:8px}
+.trial:not(.lite) .bar-go,.trial:not(.lite) .bar .bar-talk{min-height:clamp(36px,5.4vh,44px)}
+.trial:not(.lite) .bar .bar-talk{padding:0 20px}
+.trial.lite .bar{height:52px;padding:0 10px;justify-content:center}
+.trial.lite .bar-name{display:none}
+.trial.lite .bar-links{flex:1 1 auto;justify-content:space-between;gap:0}
+.trial.lite .bar-go{padding:0 8px;font-size:clamp(13px,3.7cqw,15px)}
+.trial.lite .bar .bar-talk{margin-left:0;padding:0 14px;font-size:clamp(13px,3.7cqw,15px)}
+.trial.calm .bar{transition:none}
+/* the product activity has its own strip that sticks to the top on narrow screens: keep it below the menu, not behind it */
+.trial-main .sprint-bar{transition:top .25s ease}
+.trial:not(.lite) .trial-main .sprint-bar{top:calc(clamp(56px,8vh,64px) + 8px) !important}
+.trial.lite.menu-on .trial-main .sprint-bar{top:60px !important}
+.trial.calm .trial-main .sprint-bar{transition:none}
+.work{position:relative;background:#17203A;color:#FFFFFF;margin-top:-12vh;padding:0 0 clamp(56px,10vh,96px)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px}
+.card{width:100%;height:100%;padding:0;border:0;border-radius:16px;overflow:hidden;background:#FFFFFF;color:#030711;font-family:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column;will-change:transform;transition:box-shadow .18s ease}
+.card:hover,.card:focus-visible{box-shadow:0 0 0 3px var(--acc,#F2B544)}
+.card-open{margin-top:auto;padding-top:8px;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#17203A}
+.card-open svg{transition:transform .18s ease}
+.card:hover .card-open svg{transform:translateX(4px)}
+.see-all{align-self:flex-start;min-height:44px;padding:0;border:0;background:transparent;color:#FFFFFF;font-family:inherit;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.see-all:hover{color:var(--acc,#F2B544)}
+.card-art{display:flex;justify-content:center;padding:14px 0;background:#F1F3F6}
+.card-art>span{display:block;width:180px}
+.card-body{flex:1 1 auto;display:flex;flex-direction:column;gap:6px;padding:18px 20px 20px}
+.card-body .eyebrow{color:#5B6472}
+.card-title{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:20px;line-height:1.25}
+/* the key fact: one supporting sentence under the title, with the keyword in bold on a yellow marker */
+.card-fact{margin-top:4px;font-size:16px;line-height:1.5;color:#5B6472}
+.card-fact b{font-weight:700;color:#17203A;padding:0 2px;margin-left:-2px;border-radius:2px;background:linear-gradient(transparent 42%,var(--acc,#F2B544) 42%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- the full homepage sits here. Its own top bar, opening, featured row and sign-off are replaced by the scenes around it. */
+.trial-main #top{min-height:0 !important}
+.trial-main #top>header,.trial-main #top>section[aria-label="Introduction"],.trial-main #featured,.trial-main #closing,.trial-main #copyright{display:none !important}
+.trial-main #contact>div{padding-bottom:104px !important}
+
+/* ---------- scene 3: the goodbye rises as a dome that flattens, echoing the circle */
+.hello{--ch:clamp(104px,25.5vh,230px);position:relative;overflow:hidden;min-height:100vh;background:#17203A;color:#17203A;display:flex;align-items:flex-end;justify-content:center;padding:0 24px 9vh}
+.hello-bg{position:absolute;inset:0;background:var(--acc,#F2B544);border-radius:50% 50% 0 0 / var(--arc,0px) var(--arc,0px) 0 0}
+.hello-word{position:absolute;left:0;right:0;top:20vh;text-align:center;white-space:nowrap;font-size:min(18.5cqw,29.3vh);line-height:.9;letter-spacing:-.03em;will-change:transform;pointer-events:none}
+.hello-card{position:relative;width:min(100%,560px);padding:clamp(20px,4vh,36px) 32px clamp(18px,3.6vh,32px);border-radius:28px;background:#17203A;color:#FFFFFF;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(8px,1.6vh,14px);will-change:transform}
+.hello-chibi{position:absolute;right:32px;top:calc(var(--ch) * -.765);width:calc(var(--ch) * .8235);height:var(--ch);pointer-events:none}
+.hello-card h2{margin:0;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(26px,min(4cqw,5.6vh),40px);line-height:1.15;letter-spacing:-.01em;max-width:320px}
+.hello-card p{margin:0;font-size:16px;line-height:1.5;color:#C3CBDB;text-wrap:balance}
+.hello-btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid var(--acc,#F2B544);border-radius:999px;background:var(--acc,#F2B544);color:#17203A;font-size:15px;font-weight:600;text-decoration:none;transition:transform .18s ease}
+.btn-line{background:transparent;border-color:#FFFFFF;color:#FFFFFF}
+.btn:hover{transform:translateY(-2px)}
+.foot{padding:20px 24px;background:#17203A;color:#C3CBDB;font-size:13px;text-align:center}
+
+.mini{display:none}
+/* ---------- phones, very short windows and reduced motion: no held scene. One clean statement, one supporting line, then the chibi's seat with the three paths */
+.trial.lite .sc-hero{height:auto}
+.trial.lite .stage{position:relative;height:auto;overflow:visible;padding:100px 0 0;display:flex;flex-direction:column;align-items:center;gap:0}
+.trial.lite .top{height:64px;padding:0 20px;gap:12px}
+.trial.lite .hi{--ch:132px;height:auto;overflow:visible;border-radius:0 0 50% 50% / 0 0 30px 30px}
+.trial.lite .hi-in{position:static;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:76px 20px 40px}
+.trial.lite .n2{margin-top:-30px;padding:70px 20px 44px}
+.trial.lite .n2-n{font-size:52px}
+.trial.lite .n2-l{font-size:15px}
+.trial.lite[data-opening="hello"] .stage{padding-top:44px}
+.trial.lite .hi-word{position:static;font-size:27cqw;line-height:1}
+.trial.lite .hi-card{width:auto;margin-top:calc(var(--ch) * .46);padding:24px 22px 22px;border-radius:24px}
+.trial.lite .hi-chibi{right:18px}
+.trial.lite .hi-name{font-size:30px}
+.trial.lite .hi-line{font-size:16px}
+.trial.lite .hi-pf{min-height:44px;align-content:center}
+.trial.lite .hi-pf b{font-size:15px}
+.trial.lite .hi-pf span{font-size:13px}
+.trial.lite .hi-play{display:none}
+.trial.lite #sc-hi-short{background:var(--acc,#F2B544);border-color:var(--acc,#F2B544);color:#17203A}
+.trial.lite[data-opening="hello"] .track{font-size:clamp(30px,9.6cqw,40px)}
+.trial.lite .top>span,.trial.lite .top-nav .talk{white-space:nowrap}
+.trial.lite .top-nav .talk{margin-left:0}
+.trial.lite .top-nav button:not(.talk){display:none}
+.trial.lite .tape{position:relative;width:min(100%,520px);height:auto;overflow:visible;-webkit-mask-image:none;mask-image:none}
+.trial.lite .track{position:static;white-space:normal;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0 20px;font-size:clamp(38px,12.8cqw,54px)}
+/* each line starts hidden and arrives when the script marks it .in; the timing lives on the arrived state so hiding is instant */
+.trial.lite .ph{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:0;margin:0;opacity:0;transform:translateY(12px)}
+.trial.lite .ph.in{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+.trial.lite .ph.in:nth-child(2){transition-delay:.15s}
+.trial.lite .ph.in:nth-child(3){transition-delay:.3s}
+.trial.lite .tg{display:none}
+/* the small timeline strip above the headline: three dots on a line, each arriving with its headline line */
+.trial.lite .mini{display:grid;grid-template-columns:minmax(0,170px) minmax(0,170px) auto;justify-content:start;width:min(100%,520px);margin:0 0 20px;padding:0 20px;font-size:13px;line-height:1.2;color:#5B6472}
+.mini-s{position:relative;padding:19px 14px 0 0;white-space:nowrap;opacity:0}
+.mini-s:last-child{padding-right:0}
+.mini-s b{margin-right:5px;font-weight:700;color:#17203A}
+.mini-s i{position:absolute;left:0;top:0;width:11px;height:11px;border-radius:50%;border:2.5px solid #17203A;background:var(--acc,#F2B544)}
+.mini-s:not(:last-child)::before{content:"";position:absolute;left:11px;right:0;top:4.5px;height:2px;background:#17203A;transform:scaleX(0);transform-origin:0 50%}
+.trial.lite .mini.in .mini-s{opacity:1;transition:opacity .4s ease}
+.trial.lite .mini.in .mini-s::before{transform:none;transition:transform .35s ease-out .1s}
+.trial.lite .mini.in .mini-s:nth-child(2){transition-delay:.15s}
+.trial.lite .mini.in .mini-s:nth-child(2)::before{transition-delay:.25s}
+.trial.lite .mini.in .mini-s:nth-child(3){transition-delay:.3s}
+.trial.lite .ph-t{white-space:nowrap}
+.trial.lite .ph-key .ph-t{font-size:1em}
+/* the yellow wipes in behind the last line once it has arrived */
+.trial.lite .ph-key .mark{margin-left:-.14em;background:linear-gradient(var(--acc,#F2B544),var(--acc,#F2B544)) no-repeat 0 0 / 0% 100%}
+.trial.lite .ph-key.in .mark{background-size:100% 100%;transition:background-size .45s ease .6s}
+/* the supporting line: the summary that is otherwise only read out by screen readers */
+.trial.lite .sum{position:static;order:1;width:min(100%,520px);height:auto;margin:18px 0 0;padding:0 20px;overflow:visible;clip:auto;white-space:normal;font-size:16px;line-height:1.55;color:#5B6472;opacity:0;transform:translateY(12px)}
+.trial.lite.said .sum{opacity:1;transform:none;transition:opacity .4s ease .5s,transform .4s ease .5s}
+.trial.lite.calm .ph.in,.trial.lite.calm .ph-key.in .mark,.trial.lite.calm.said .sum,.trial.lite.calm .mini.in .mini-s,.trial.lite.calm .mini.in .mini-s::before{transition:none}
+.trial.lite .floor,.trial.lite .hint,.trial.lite .wipe-lead,.trial.lite .seat-tip{display:none}
+.trial.lite .bubble{right:auto;left:4px;bottom:calc(100% + 16px);width:min(184px,calc(100% - 150px))}
+.trial.lite .say{display:none}
+.trial.lite .say:last-child{display:block;left:0;right:auto;opacity:1;padding:10px 14px;font-size:clamp(13px,3.9cqw,15px);border-radius:16px 16px 4px 16px}
+.trial.lite .short-go{order:3;position:static;width:min(100%,520px);min-height:44px;margin-top:8px;padding:0 20px;font-size:14px;text-align:center}
+.trial.lite .panel{--ch:134px;order:2;position:relative;right:auto;top:auto;width:calc(min(100%,520px) - 32px);height:auto;margin:124px 0 0;border-radius:22px}
+.trial.lite .panel-in{position:static;overflow:visible}
+.trial.lite .paths{position:static;height:auto;padding:46px 18px 18px;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto repeat(3,1fr);gap:8px;opacity:1;visibility:visible;pointer-events:auto}
+.trial.lite .paths-q{margin-bottom:8px;font-size:24px}
+.trial.lite .path{min-height:62px;padding:8px 14px;border-radius:14px}
+.trial.lite .path b{font-size:17px}
+.trial.lite .path small{display:block}
+.trial.lite .wipe-main{order:4;position:relative;inset:auto;align-self:stretch;clip-path:none;margin-top:24px;padding:104px 0 28px;border-radius:50% 50% 0 0 / 34px 34px 0 0}
+.trial.lite .work-head{position:static}
+.trial.lite .work{margin-top:-1px}
+.trial.lite .band{top:30px;font-size:21cqw;-webkit-text-stroke-width:1.5px}
+.trial.lite .lines{font-size:clamp(34px,9cqw,56px)}
+.trial.lite .hello{--ch:200px;min-height:max(100vh,600px)}
+.trial.lite .hello-word{top:11vh;font-size:27cqw;line-height:.95}
+.trial.lite .hello-word span{display:block}
+.trial.calm .ln>span{transform:none}
+@media (prefers-reduced-motion:reduce){.hint svg,.hint-mouse i{animation:none}.pose,.ln>span{transition:none}}
+/* ---------- three trial openings (data-mock), each on its own mock board. The page in use sets none of them.
+   one: everything on the first screen, no banner. join: the banner stays, and each scene rises over the one before with a domed top, like the ending.
+   split: a two-sided first screen, who I am on the left, the numbers and skills on the right. In all three the Hello screen holds still while the next scene rises over it */
+.hi-pin{position:relative}
+.hi-nums{display:none}
+.hi-figs{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,2.2vh,20px) 20px}
+.hi-figs li{min-width:0;display:flex;flex-direction:column;gap:4px}
+.hi-figs b{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(32px,min(3.8cqw,6vh),50px);line-height:1;font-variant-numeric:lining-nums tabular-nums;color:var(--acc,#F2B544)}
+.hi-figs span{font-size:clamp(13px,1.85vh,14.5px);line-height:1.35;color:#C3CBDB}
+.trial.calm .hi-nums,.trial.calm .hi-skills,.trial.calm .hi-btns{animation:none !important}
+@media (prefers-reduced-motion:reduce){.hi-nums,.hi-skills,.hi-btns{animation:none !important}}
+/* the drawing has empty margin inside its own frame (13% above the hair, 4% under the shoes, 22% at the sides), so the frame is set a little larger than the box above */
+.hi-cue{display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin-top:clamp(2px,1.2vh,14px);padding:4px 14px;border:0;border-radius:14px;background:transparent;font-family:inherit;font-size:clamp(14px,2vh,16px);font-weight:700;line-height:1.3;color:#17203A;white-space:nowrap;cursor:pointer}
+.hi-cue svg{animation:hint-bob 1.6s ease-in-out infinite}
+.trial.lite .hi-cue{display:none}
+.trial.calm .hi-cue,.trial.calm .hi-cue svg{animation:none}
+@media (prefers-reduced-motion:reduce){.hi-cue,.hi-cue svg{animation:none}}
+/* the page in use (no mock): no banner after Hello. The Hello screen holds still while the story rises over it with a domed top, the same join as the ending;
+   the wrapper is two screens tall and the story overlaps its second screen. The numbers are in the homepage's own strip further down */
+.trial[data-opening="hello"][data-mock="none"] .n2{display:none !important}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi{position:sticky;top:0;z-index:1;border-radius:0}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-pin{height:200vh}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .sc-hero{z-index:3;margin-top:-100vh;border-radius:50% 50% 0 0 / 9vh 9vh 0 0;background:#FCFCFC;overflow:clip}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi{border-radius:0}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi-in{padding-bottom:66px}
+.trial.lite[data-opening="hello"][data-mock="none"] .sc-hero{z-index:3;margin-top:-30px}
+.trial.lite[data-opening="hello"][data-mock="none"] .stage{border-radius:50% 50% 0 0 / 30px 30px 0 0}
+.work{z-index:4}
+/* the ending card: a round space for a photo of Shermaine, to the left of the heading and the sentence; the buttons run underneath.
+   On phones the photo sits beside the heading only and the sentence takes the full width, so the card grows as little as possible */
+.hello-card{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:20px;align-items:center}
+.hello-photo{grid-column:1;grid-row:1 / span 2;width:clamp(84px,13vh,112px);height:clamp(84px,13vh,112px);box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:3px solid var(--acc,#F2B544);border-radius:50%;background:#222D4E;color:#C3CBDB;font-size:12px;line-height:1.2;text-align:center}
+.hello-card h2{grid-column:2;align-self:end}
+.hello-card p{grid-column:2;align-self:start}
+.hello-btns{grid-column:1 / -1}
+.trial.lite .hello-card{column-gap:14px;padding-top:44px}
+.trial.lite .hello-photo{grid-row:1;width:76px;height:76px}
+.trial.lite .hello-card h2{align-self:center}
+.trial.lite .hello-card p{grid-column:1 / -1}
+/* the page in use: "Scroll or click to start" is a cue under the card (it still plays the opening when clicked), and the 60-second version is the card's one button.
+   The cue sits in the space already under the card, so the card and the word stay where they were; on short windows it lies on one line */
+.trial[data-opening="hello"][data-mock="none"] #sc-hi-play{display:none}
+.trial[data-opening="hello"][data-mock="none"] #sc-hi-short{background:var(--acc,#F2B544);border-color:var(--acc,#F2B544);color:#17203A}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-cue{position:absolute;left:0;right:0;bottom:clamp(2px,1vh,10px);width:max-content;margin:0 auto;padding:2px 14px}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-in{padding-bottom:calc(clamp(34px,7vh,68px) + clamp(12px,2.2vh,22px) + clamp(0px,calc(12vh - 84px),28px))}
+.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-card{padding:clamp(16px,3.2vh,26px) 32px clamp(14px,2.8vh,22px)}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi-word{font-size:30cqw}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi-name{font-size:27px}
+.trial.lite[data-opening="hello"][data-mock="none"] .hi-line{font-size:15px}
+.trial.lite[data-opening="hello"][data-mock="none"] #sc-hi-short{font-size:14px}
+@media (max-height:780px){.trial[data-opening="hello"][data-mock="none"]:not(.lite) .hi-cue{flex-direction:row;align-items:center;gap:8px;bottom:clamp(2px,.8vh,6px)}}
+</style>
+</helmet>
+<div ref="{{boxRef}}" class="trial" data-opening="hello" data-mock="none" style="--acc: {{accent}}; width: 100%; height: 100vh; overflow-x: hidden; overflow-y: auto; background: #FCFCFC; color: #030711; font-family: Inter, system-ui, sans-serif">
+
+<div id="sc-barwrap" class="sx bar-wrap"><nav id="sc-bar" class="bar" aria-label="Sections">
+<span class="bar-left"><button type="button" id="sc-bar-top" class="bar-name serif">Shermaine Tan.</button>
+<button type="button" id="sc-bar-back" class="bar-back" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg><span id="sc-bar-back-t" class="bar-back-t" aria-hidden="true"></span></button></span>
+<span class="bar-links"><button type="button" class="bar-go">My work</button><button type="button" class="bar-go">My story</button><button type="button" class="bar-go">How I think</button><button type="button" id="sc-bar-talk" class="bar-talk">Let's talk</button></span>
+</nav></div>
+<div class="top">
+<span class="serif" style="font-size: 22px">Shermaine Tan.</span>
+<div class="top-nav"><button type="button" class="nav-go">My work</button><button type="button" class="nav-go">My story</button><button type="button" class="nav-go">How I think</button><button type="button" id="sc-talk" class="talk">Let's talk</button></div>
+</div>
+<div class="sx hi-pin">
+<section id="sc-hi" class="sx hi" aria-label="Hello"><div class="hi-in">
+<div id="sc-hi-word" class="hi-word serif" aria-hidden="true">Hello.</div>
+<div id="sc-hi-card" class="hi-card">
+<div class="hi-chibi" aria-hidden="true"><dc-import name="ChibiPose" pose="wave" hint-size="190px,230px"></dc-import></div>
+<p class="hi-name serif">I'm Shermaine.</p>
+<p class="hi-line">Product manager in Malaysia, building <b>AI products</b>.</p>
+<div class="hi-skills"><span class="eyebrow hi-label">See for yourself</span>
+<ul class="hi-proof">
+<li><button type="button" class="hi-pf" data-path="work" data-filter="AI"><b>3 AI projects at work</b><span>a chatbot, computer vision and a Copilot agent</span></button></li>
+<li><button type="button" class="hi-pf" data-path="work"><b>3 AI tools in my own time</b><span>each with a demo video</span></button></li>
+<li><button type="button" class="hi-pf" data-path="think"><b>5 checks before AI ships</b><span>try them yourself</span></button></li>
+</ul></div>
+<div class="hi-nums"><span class="eyebrow hi-label">In numbers</span>
+<ul class="hi-figs"><li><b>8</b><span>years in product and project delivery</span></li><li><b>7</b><span>industries, from telco and TV to water and e‑commerce</span></li><li><b>3</b><span>AI tools built in my own time</span></li><li><b>2</b><span>Gold awards for brand experience</span></li></ul></div>
+<div class="hi-btns"><button type="button" id="sc-hi-play" class="btn hi-play"><span class="hint-fine">Scroll or click to start</span><span class="hint-coarse">Swipe or tap to start</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><button type="button" id="sc-hi-short" class="btn btn-line">In a hurry? 60-second version</button></div>
+</div>
+<button type="button" id="sc-hi-cue" class="hi-cue"><span class="hint-fine">Scroll or click to start</span><span class="hint-coarse">Swipe or tap to start</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+</div></section>
+<section id="sc-nums" class="sx n2" aria-label="In numbers: 8 years in product and project delivery, 7 industries, 3 AI tools built in my own time, 2 Gold awards for brand experience">
+<div class="n2-in" aria-hidden="true">
+<div class="n2-i"><span class="n2-n">8</span><span class="n2-l">years in product and project delivery</span></div>
+<div class="n2-i"><span class="n2-n">7</span><span class="n2-l">industries, from telco and TV to water and e-commerce</span></div>
+<div class="n2-i"><span class="n2-n">3</span><span class="n2-l">AI tools built in my own time</span></div>
+<div class="n2-i"><span class="n2-n">2</span><span class="n2-l">Gold awards for brand experience</span></div>
+</div>
+</section>
+</div>
+<section id="sc-hero" class="sx sc-hero" aria-label="Introduction">
+<div class="stage">
+<h1 class="sr-only">{{h1}}</h1>
+<p class="sr-only sum">A law degree and a diploma in international arbitration, then eight years in product and project delivery. Now chatbots, computer vision and AI agents, as a product manager in Malaysia.</p>
+<div id="sc-mini" class="mini" aria-hidden="true"><span class="mini-s"><i></i><b>{{b1.year}}</b>{{b1.short}}</span><span class="mini-s"><i></i><b>{{b2.year}}</b>{{b2.short}}</span><span class="mini-s"><i></i><b>{{b3.year}}</b>{{b3.short}}</span></div>
+<div class="tape" aria-hidden="true"><div id="sc-track" class="track serif"><span id="ph1" class="ph"><span class="tg"><i></i><b>{{b1.year}}</b> · {{b1.role}}</span><span class="ph-t">{{b1.head}}</span></span><span id="ph2" class="ph"><span class="tg"><i></i><b>{{b2.year}}</b> · {{b2.role}}</span><span class="ph-t">{{b2.head}}</span></span><span id="ph3" class="ph ph-key"><span class="tg"><i></i><b>{{b3.year}}</b> · {{b3.role}}</span><span class="ph-t"><span class="mark">{{b3.head}}</span></span></span></div></div>
+<div class="floor" aria-hidden="true"><i id="sc-floor"></i></div>
+<button type="button" id="sc-hint" class="hint"><span class="hint-mouse" aria-hidden="true"><i></i></span><span class="hint-fine">Scroll down or click to play</span><span class="hint-coarse">Swipe up or tap to play</span>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<button type="button" id="sc-short" class="short-go">In a hurry? Read the 60-second version</button>
+
+<div id="sc-panel" class="panel">
+<span id="sc-tip" class="seat-tip" aria-hidden="true">3 paths ahead<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span>
+<div id="sc-chibi" class="chibi" aria-hidden="true">
+<div class="pose on"><dc-import name="ChibiPose" pose="book" hint-size="190px,230px"></dc-import></div>
+<div class="pose"><dc-import name="ChibiPose" pose="glasses" hint-size="190px,230px"></dc-import></div>
+<div class="pose"><dc-import name="ChibiPose" pose="wave" hint-size="190px,230px"></dc-import></div>
+</div>
+<div class="bubble" aria-hidden="true">
+<span class="say">{{b1.pre}}<span class="hl">{{b1.hl}}</span>{{b1.post}}</span>
+<span class="say">{{b2.pre}}<span class="hl">{{b2.hl}}</span>{{b2.post}}</span>
+<span class="say">{{b3.pre}}<span class="hl">{{b3.hl}}</span>{{b3.post}}</span>
+<span class="say">{{b4.pre}}<span class="hl">{{b4.hl}}</span>{{b4.post}}</span>
+</div>
+<div class="panel-in">
+<div id="sc-paths" class="paths">
+<span class="paths-q">Where should we start?</span>
+<button type="button" class="path"><span class="path-t"><b>Show me what you've built</b><small>Three AI tools, then the bigger projects</small></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+<button type="button" class="path"><span class="path-t"><b>Tell me your story</b><small>Law degree to AI, in six chapters</small></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+<button type="button" class="path"><span class="path-t"><b>Test how I think</b><small>Two quick activities: AI and product</small></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</div>
+
+<div id="sc-wipe-lead" class="wipe wipe-lead" aria-hidden="true"></div>
+<div id="sc-wipe" class="wipe wipe-main">
+<div id="sc-band" class="band serif" aria-hidden="true">Law&nbsp;&nbsp;·&nbsp;&nbsp;Product&nbsp;&nbsp;·&nbsp;&nbsp;AI&nbsp;&nbsp;·&nbsp;&nbsp;Law&nbsp;&nbsp;·&nbsp;&nbsp;Product&nbsp;&nbsp;·&nbsp;&nbsp;AI</div>
+<div class="work-head"><div class="work-in">
+<span class="eyebrow" style="color: #C3CBDB">Featured work</span>
+<h2 id="sc-lines" class="lines serif"><span class="ln"><span>Three projects</span></span><span class="ln"><span>to start with</span></span></h2>
+</div></div>
+</div>
+</div>
+</section>
+
+<section id="sc-work" class="sx work" aria-label="Featured work, the three projects">
+<div class="work-in">
+<div class="cards">
+<div class="card-wrap"><button type="button" class="card">
+<span class="card-art" aria-hidden="true"><span><dc-import name="CaseArt" art="chatbot" hint-size="180px,120px"></dc-import></span></span>
+<span class="card-body"><span class="eyebrow">Air Selangor</span><span class="card-title">Joy, a bilingual NLP chatbot</span><span class="card-fact"><b>No ticket needed</b> to check a bill or a case status, in English or Malay</span><span class="card-open">Open case study<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span>
+</button></div>
+<div class="card-wrap"><button type="button" class="card">
+<span class="card-art" aria-hidden="true"><span><dc-import name="CaseArt" art="handover" hint-size="180px,120px"></dc-import></span></span>
+<span class="card-body"><span class="eyebrow">Air Selangor</span><span class="card-title">Knowledge handover agent</span><span class="card-fact"><b>Under 20 seconds</b> per answer, pointing to the exact document and page</span><span class="card-open">Open case study<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span>
+</button></div>
+<div class="card-wrap"><button type="button" class="card">
+<span class="card-art" aria-hidden="true"><span><dc-import name="CaseArt" art="herbalife" hint-size="180px,120px"></dc-import></span></span>
+<span class="card-body"><span class="eyebrow">MinistryXR</span><span class="card-title">Herbalife Virtual Extravaganza</span><span class="card-fact"><b>35,000+</b> members across 14 countries</span><span class="card-open">Open case study<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span>
+</button></div>
+</div>
+<button type="button" id="sc-all" class="see-all">See all projects and my AI builds</button>
+</div>
+</section>
+
+<div id="sc-main" class="trial-main">
+<dc-import name="Main" accent="{{accent}}" hint-size="1440px,2400px"></dc-import>
+</div>
+
+<section id="sc-hello" class="sx hello" aria-label="Contact">
+<div class="hello-bg" aria-hidden="true"></div>
+<div id="sc-hello-word" class="hello-word serif" aria-hidden="true"><span>Thank</span> <span>you.</span></div>
+<div id="sc-hello-card" class="hello-card">
+<div class="hello-chibi" aria-hidden="true"><dc-import name="ChibiPose" pose="wave" hint-size="190px,230px"></dc-import></div>
+<div class="hello-photo">[Your photo]</div>
+<h2>Let's build something great.</h2>
+<p>The best way to reach me is by email or LinkedIn.</p>
+<div class="hello-btns">
+<a class="btn" href="#sc-hello"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Email me</a>
+<a class="btn btn-line" href="#sc-hello">LinkedIn</a>
+<a class="btn btn-line" href="#sc-hello">Request my CV</a>
+</div>
+</div>
+</section>
+<div class="sx foot">© 2026 Shermaine Tan</div>
+<div class="sx spot-wrap"><button type="button" id="sc-spot" class="spot-pill" hidden aria-label="Back to where you were"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 18px"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg><span>Back to where you were</span></button></div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#F2B544"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    const box = this.boxEl;
+    if (!box || typeof window === 'undefined') return;
+    const one = (sel) => box.querySelector(sel);
+    const all = (sel) => Array.prototype.slice.call(box.querySelectorAll(sel));
+    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    const seg = (p, a, b) => clamp((p - a) / (b - a), 0, 1);
+    const ease = (t) => t * t * (3 - 2 * t);
+    const px = (x, y) => 'translate3d(' + x.toFixed(1) + 'px,' + (y || 0).toFixed(1) + 'px,0)';
+    const calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    const hero = one('#sc-hero');
+    const stage = one('.stage');
+    const track = one('#sc-track');
+    const phrases = [one('#ph1'), one('#ph2'), one('#ph3')];
+    // the amber Hello scene comes first, as an ordinary section; the story scene then starts at `base`, its own place in the page.
+    // The beats are fractions of the story's own pace (t0): each turn moves the track on by one headline, then the seat opens (open),
+    // the paths are held (holdA to holdB, plus the extra pause), and the wipe takes over. stops are where click-to-play rests
+    const hi = one('#sc-hi');
+    // The Hello entrance plays when the Hello screen is actually in view and the fonts have arrived, not while the page is still loading out of sight.
+    // It plays again only if the screen comes back into view with the page still at the very top: that happens on a design canvas when the board is
+    // panned away and back, not during an ordinary scroll down and up, where the page is no longer at the top when Hello returns.
+    if (!calm && typeof IntersectionObserver !== 'undefined') {
+      box.classList.add('hi-wait');
+      const fontsIn = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+      let hiOn = false, hiPlayed = false, wentDown = false;   // wentDown: the page has been scrolled since Hello was last seen resting at the top
+      this.hiScroll = () => { if (box.scrollTop > 2) wentDown = true; else if (hiOn) wentDown = false; };
+      box.addEventListener('scroll', this.hiScroll, { passive: true });
+      const playHi = () => { if (!this.hiWatch) return; hiPlayed = true; box.classList.remove('hi-wait'); box.classList.remove('hi-go'); void box.offsetWidth; box.classList.add('hi-go'); };
+      this.hiWatch = new IntersectionObserver((list) => {
+        const on = list[list.length - 1].isIntersecting;
+        if (on && !hiOn) { if (!hiPlayed || (box.scrollTop < 2 && !wentDown)) fontsIn.then(playHi, playHi); if (box.scrollTop < 2) wentDown = false; }
+        hiOn = on;
+      }, { threshold: 0.3 });
+      this.hiWatch.observe(hi);
+      // safety net: whatever happens, the Hello screen never stays hidden. If nothing has started it after a moment, it starts anyway
+      this.hiTimer = window.setTimeout(() => { this.hiTimer = null; if (!hiPlayed) playHi(); }, 2500);
+    }
+    const nums = one('#sc-nums');
+    const numEls = all('.n2-n');
+    const B = { turns: [[0.04, 0.22], [0.28, 0.46]], open: [0.52, 0.61], holdA: 0.61, holdB: 0.74, lead: [0.74, 0.88], grow: [0.77, 0.91], lines: 0.865, stops: [0.25, 0.49] };
+    const mini = one('#sc-mini');
+    const panel = one('#sc-panel');
+    const chibi = one('#sc-chibi');
+    const poses = all('.pose');
+    const says = all('.say');
+    const paths = one('#sc-paths');
+    const rows = all('#sc-paths .path');
+    const floor = one('#sc-floor');
+    const hint = one('#sc-hint');
+    const bar = one('#sc-bar');
+    const tip = one('#sc-tip');
+    const wipeLead = one('#sc-wipe-lead');
+    const wipe = one('#sc-wipe');
+    const band = one('#sc-band');
+    const lines = one('#sc-lines');
+    const cards = all('.card-wrap');
+    const hello = one('#sc-hello');
+    const helloWord = one('#sc-hello-word');
+    const helloCard = one('#sc-hello-card');
+    const driven = [track, chibi, paths, hint, tip, floor, wipeLead, wipe, band, helloWord, helloCard].concat(phrases, says, cards.map((w) => w.firstElementChild));
+    let wasLite = null;
+    let cur = box.scrollTop;   // the scroll position the animation is at: it glides after the real one
+    let last = 0;
+    let lite = false;
+    let goingUp = false;
+    // the ways back. mainBack: the homepage inside has somewhere to return to (its label). spot: "Let's talk" took the visitor
+    // to the end of the page from this scroll position. spotFrom: where their own scrolling is measured from afterwards
+    const backBtn = one('#sc-bar-back');
+    const backText = one('#sc-bar-back-t');
+    const spotBtn = one('#sc-spot');
+    let mainBack = null;
+    let spot = null;
+    let spotFrom = null;
+    const showBack = () => {
+      const label = spot !== null ? 'Back to where you were' : mainBack;
+      backBtn.hidden = !label;
+      if (label) { backText.setAttribute('data-label', label); backBtn.setAttribute('aria-label', label); }
+      spotBtn.hidden = spot === null;
+      box.classList.toggle('has-spot', spot !== null);
+    };
+    const clearSpot = () => {
+      if (spot === null) return;
+      spot = null;
+      spotFrom = null;
+      spotBtn.classList.remove('small');
+      showBack();
+    };
+    let peak = box.scrollTop;   // the furthest down since the scroll last turned upward, and the furthest up since it turned down
+    let dip = box.scrollTop;
+
+    const targets = numEls.map((el) => Number(el.textContent) || 0);
+    let numsDone = calm;
+    const showNums = () => { numsDone = true; numEls.forEach((el, k) => { el.textContent = String(targets[k]); }); };
+    const rollNums = () => {
+      numsDone = true;
+      const t0 = window.performance.now();
+      const step = (t) => {
+        const k = clamp((t - t0) / 1400, 0, 1);
+        const e = 1 - Math.pow(1 - k, 3);
+        numEls.forEach((el, n) => { el.textContent = String(Math.round(targets[n] * e)); });
+        if (k < 1) this.numsFrame = window.requestAnimationFrame(step); else this.numsFrame = null;
+      };
+      this.numsFrame = window.requestAnimationFrame(step);
+    };
+    if (!numsDone) numEls.forEach((el) => { el.textContent = '0'; });
+    const render = () => {
+      const vw = box.clientWidth;
+      const vh = box.clientHeight;
+      const top = box.getBoundingClientRect().top;
+      lite = calm || vw < 760 || vh < 480;
+      box.classList.toggle('tight', !lite && (vh < 760 || vw < 1210));   // no room for the second line on each path
+      if (lite !== wasLite) {
+        box.classList.toggle('lite', lite);
+        box.classList.toggle('calm', calm);
+        // hand every part back to the stylesheet, so each layout starts clean
+        driven.forEach((el) => { el.style.transform = ''; el.style.opacity = ''; el.style.clipPath = ''; });
+        paths.style.visibility = '';
+        paths.style.pointerEvents = '';
+        hint.style.visibility = '';
+        tip.style.visibility = '';
+        panel.style.height = '';
+        hello.style.removeProperty('--arc');
+        poses.forEach((el, k) => el.classList.toggle('on', lite ? k === poses.length - 1 : k === 0));
+        if (!lite) lines.classList.remove('in');
+        rows.forEach((el) => el.classList.remove('lit'));
+        wasLite = lite;
+        if (lite) void box.offsetWidth;   // let the hidden starting state apply first, so the lines can arrive from it
+      }
+      // tell the homepage inside how tall the menu is and whether it only shows while scrolling up,
+      // so whatever it scrolls to lands below the menu and not behind it
+      const menuH = bar.offsetHeight + 'px';
+      if (box.style.getPropertyValue('--menu-h') !== menuH) box.style.setProperty('--menu-h', menuH);
+      const menuUp = lite ? '1' : '0';
+      if (box.style.getPropertyValue('--menu-up') !== menuUp) box.style.setProperty('--menu-up', menuUp);
+      const lag = box.scrollTop - cur;   // how far the glide is behind the real scroll right now
+      // the menu. Phone layout: once the opening is behind us, and only while scrolling up, so it never covers what is being read.
+      // The direction has some slack (24px up, 8px down) so a wobble does not flick it on and off
+      const yNow = box.scrollTop;
+      if (spot !== null && spotFrom !== null) {
+        if (Math.abs(yNow - spot) < vh * 0.5) clearSpot();                                  // they scrolled back there themselves
+        else if (Math.abs(yNow - spotFrom) > 120) spotBtn.classList.add('small');          // reading on: the phone button steps aside
+      }
+      if (goingUp) { dip = Math.min(dip, yNow); if (yNow - dip > 8) { goingUp = false; peak = yNow; } }
+      else { peak = Math.max(peak, yNow); if (peak - yNow > 24) { goingUp = true; dip = yNow; } }
+      let menuOn = lite && goingUp && yNow >= hero.offsetTop + hero.offsetHeight - 1;
+      let solid = true;
+      let overHi = false;
+
+      if (!lite) {
+        // scene 1: p is how far through the held hero we are, from 0 to 1
+        // the opening keeps its original pace (t0); the extra length (stay) is all spent with the three paths open,
+        // so they are not scrolled past in a couple of clicks. v is the scroll position with that pause taken out
+        const travel = hero.offsetHeight - vh;
+        const stay = Math.min(vh * 0.7, travel * 0.5);
+        const t0 = travel - stay;
+        const holdA = t0 * B.holdA;
+        const holdB = t0 * B.holdB + stay;
+        const c = Math.max(0, cur - hero.offsetTop);   // how far into the story scene we are (it is not first in the page when Hello is)
+        const v = c <= holdA ? c : c >= holdB ? c - stay : holdA + (c - holdA) * (t0 * (B.holdB - B.holdA)) / (holdB - holdA);
+        const p = clamp(v / t0, 0, 1);
+        const walk = clamp((c - holdA) / (holdB - holdA), 0, 1);   // 0 to 1 through the pause
+        const focus = ease(seg(p, B.turns[0][0], B.turns[0][1])) + ease(seg(p, B.turns[1][0], B.turns[1][1]));   // which phrase rests on the left, 0 to 2
+        const pathsIn = ease(seg(p, B.open[0], B.open[1]));                                                       // the chibi's seat opens into the three paths
+        const beat = focus + pathsIn;
+        const lead = ease(seg(p, B.lead[0], B.lead[1]));
+        const grow = ease(seg(p, B.grow[0], B.grow[1]));
+
+        const xs = phrases.map((el) => el.offsetLeft);
+        const i = Math.min(1, Math.floor(focus));
+        track.style.transform = px(vw * 0.06 - (xs[i] + (xs[i + 1] - xs[i]) * (focus - i)));
+        phrases.forEach((el, k) => { el.style.opacity = clamp(1 - Math.abs(focus - k) * 1.2, 0, 1).toFixed(3); });
+        says.forEach((el, k) => {
+          const o = clamp(1 - Math.abs(k - beat) * 2.6, 0, 1);
+          el.style.opacity = o.toFixed(3);
+          el.style.transform = 'scale(' + (0.9 + 0.1 * o).toFixed(3) + ')';
+        });
+        chibi.style.transform = px(0, -Math.sin(Math.PI * (beat - Math.floor(beat))) * vh * 0.022);   // a small hop on every change
+        const poseAt = Math.min(poses.length - 1, Math.round(focus));
+        poses.forEach((el, k) => el.classList.toggle('on', k === poseAt));
+        floor.style.transform = 'scaleX(' + ((focus + 1) / 3).toFixed(3) + ')';
+        const cue = 1 - seg(p, 0.01, 0.05);
+        hint.style.opacity = cue.toFixed(3);
+        hint.style.visibility = cue < 0.02 ? 'hidden' : 'visible';   // once faded it must not catch clicks or focus
+
+        const seat = clamp(vh * 0.076, 44, 68);
+        panel.style.height = (seat + (vh * 0.44 - seat) * pathsIn).toFixed(1) + 'px';
+        paths.style.opacity = ease(seg(pathsIn, 0.3, 1)).toFixed(3);
+        // the seat's own label gives way as the paths arrive, and stays hidden wherever it would run into the chibi
+        tip.style.opacity = (1 - seg(pathsIn, 0, 0.35)).toFixed(3);
+        tip.style.visibility = tip.getBoundingClientRect().right > chibi.getBoundingClientRect().left + chibi.offsetWidth * 0.16 ? 'hidden' : 'visible';
+        paths.style.visibility = pathsIn > 0.02 ? 'visible' : 'hidden';
+        paths.style.pointerEvents = pathsIn > 0.9 && lead < 0.03 ? 'auto' : 'none';
+        // while the paths are held, scrolling walks down them one at a time, so each one gets read
+        const litAt = walk > 0.1 && walk < 0.91 ? Math.min(2, Math.floor((walk - 0.1) / 0.27)) : -1;
+        rows.forEach((el, k) => el.classList.toggle('lit', k === litAt));
+
+        const pr = panel.getBoundingClientRect();
+        const sr = stage.getBoundingClientRect();
+        const at = 'px at ' + (pr.left - sr.left + pr.width / 2).toFixed(1) + 'px ' + (pr.top - sr.top + pr.height * 0.45).toFixed(1) + 'px)';
+        const far = Math.hypot(vw, vh) * 1.05;
+        wipeLead.style.clipPath = 'circle(' + (lead * far).toFixed(1) + at;
+        wipe.style.clipPath = 'circle(' + (grow * far).toFixed(1) + at;
+        lines.classList.toggle('in', p > B.lines);
+        // wide screens: the menu is always there. It is see-through over the opening and turns solid the moment the wipe reaches it,
+        // so the circles pass underneath and the three choices never leave the screen
+        menuOn = true;
+        solid = lead * far > pr.top - sr.top + pr.height * 0.45 - bar.offsetHeight;
+        {
+          // over the Hello scene the menu wears the scene's colour, until the story's dome reaches the menu
+          const barH = bar.offsetHeight;
+          overHi = hero.getBoundingClientRect().top - top > barH;
+          if (!overHi && yNow < hero.offsetTop + vh * 0.09) solid = true;   // a solid strip until the corners of the rising sheet have cleared the menu
+          else if (overHi) solid = false;
+        }
+        band.style.transform = px((0.16 - clamp((v - t0 * B.holdB) / (t0 * (1 - B.holdB) + vh), 0, 1) * 0.7) * vw);
+      } else {
+        // phone layout: the three headline lines arrive one after another, then the supporting line under them
+        phrases.forEach((el) => { if (calm || el.getBoundingClientRect().top - top < vh * 0.86) el.classList.add('in'); });
+        if (phrases[0].classList.contains('in')) mini.classList.add('in');
+        if (phrases[2].classList.contains('in')) box.classList.add('said');
+        if (lines.getBoundingClientRect().top - top < vh * 0.9) lines.classList.add('in');
+      }
+      bar.classList.toggle('on', menuOn);
+      bar.classList.toggle('solid', solid);
+      bar.classList.toggle('on-hi', overHi);
+      // the banner's numbers count up the first time it comes into view; met from above (after a jump down the page) they are simply there
+      if (!numsDone) {
+        const nr = numEls[0].getBoundingClientRect();
+        if (nr.bottom - top < 0) showNums();
+        else if (nr.top - top < vh * 0.88) rollNums();
+      }
+      box.classList.toggle('menu-on', lite && menuOn);
+      if (calm) return;
+
+      if (lite) {
+        const wr = wipe.getBoundingClientRect();
+        band.style.transform = px((0.1 - clamp((vh - (wr.top - top)) / (vh + wr.height), 0, 1) * 0.6) * vw);
+      } else {
+        // scene 2: the three cards drift at slightly different speeds
+        cards.forEach((w, k) => {
+          const r = w.getBoundingClientRect();
+          const off = ((r.top - top + lag) + r.height / 2 - vh / 2) / vh;
+          w.firstElementChild.style.transform = px(0, off * [36, 0, -36][k % 3]);
+        });
+      }
+
+      // scene 3: the dome flattens, the word slides in from the side, the card rises
+      const hr = hello.getBoundingClientRect();
+      const arrive = ease(clamp((vh - (hr.top - top + lag)) / hr.height, 0, 1));
+      hello.style.setProperty('--arc', ((1 - arrive) * vh * 0.32).toFixed(1) + 'px');
+      helloWord.style.transform = px((1 - arrive) * vw * 0.46);
+      helloCard.style.transform = px(0, (1 - arrive) * 140);
+    };
+
+    const loop = (now) => {
+      this.frame = null;
+      const target = box.scrollTop;
+      const dt = clamp(now - last, 0, 64);
+      last = now;
+      if (calm || lite) cur = target;
+      else {
+        cur += (target - cur) * (1 - Math.exp(-dt / 150));
+        if (Math.abs(target - cur) < 0.35) cur = target;
+      }
+      render();
+      if (cur !== target) this.frame = window.requestAnimationFrame(loop);
+    };
+
+    this.schedule = () => {
+      if (this.frame) return;
+      last = window.performance.now();
+      this.frame = window.requestAnimationFrame(loop);
+    };
+    // every button opens its real place in the homepage below
+    const smooth = calm ? 'auto' : 'smooth';
+    const go = (detail) => {
+      if (!detail.back) clearSpot();   // going somewhere else on purpose: the old spot no longer matters
+      const main = box.querySelector('#sc-main #top');
+      if (main) main.dispatchEvent(new window.CustomEvent('portfolio-go', { detail: detail }));
+      else box.scrollTo({ top: hero.offsetHeight - box.clientHeight * 0.45, behavior: smooth });
+    };
+    this.wired = [];
+    const wire = (el, fn) => { if (el) { el.addEventListener('click', fn); this.wired.push([el, fn]); } };
+    const pathIds = ['work', 'story', 'think'];
+    all('.path').forEach((b, k) => wire(b, () => go({ path: pathIds[k] })));
+    all('.nav-go').forEach((b, k) => wire(b, () => go({ path: pathIds[k] })));
+    ['chatbot', 'handover', 'herbalife'].forEach((id, k) => wire(cards[k] && cards[k].firstElementChild, () => go({ case: id })));
+    wire(one('#sc-all'), () => go({ path: 'work' }));
+    wire(one('#sc-short'), () => go({ path: 'short' }));
+    // the cue can play the opening for people who do not scroll: it glides through the beats, pauses on each so the line can be read,
+    // and stops with the three paths open. Any scroll, key or tap of their own takes over at once.
+    let playing = 0;
+    this.stopPlay = () => { playing = 0; };
+    const play = () => {
+      if (lite) return;
+      const id = playing = window.performance.now();
+      const vh0 = box.clientHeight;
+      const travel = hero.offsetHeight - vh0;
+      const stay = Math.min(vh0 * 0.7, travel * 0.5);
+      const t0 = travel - stay;
+      const base = hero.offsetTop;
+      // the play-through also rests on the first story line
+      const lead = [base];
+      const stops = lead.concat(B.stops.map((k) => base + k * t0), [base + B.holdA * t0 + ((B.holdB - B.holdA) * t0 + stay) * 0.04]).filter((y) => y > box.scrollTop + 4);
+      const glideTo = (y, ms) => new Promise((done) => {
+        const from = box.scrollTop;
+        const t0 = window.performance.now();
+        const step = (t) => {
+          if (playing !== id) { done(false); return; }
+          const k = clamp((t - t0) / ms, 0, 1);
+          box.scrollTop = from + (y - from) * (k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2);
+          if (k < 1) window.requestAnimationFrame(step); else done(true);
+        };
+        window.requestAnimationFrame(step);
+      });
+      const hold = (ms) => new Promise((done) => window.setTimeout(() => done(playing === id), ms));
+      (async () => {
+        for (let k = 0; k < stops.length; k++) {
+          if (!(await glideTo(stops[k], 950))) return;
+          if (k < stops.length - 1 && !(await hold(1500))) return;
+        }
+        if (playing === id) playing = 0;
+      })();
+    };
+    wire(hint, play);
+    const hiPlay = one('#sc-hi-play');
+    wire(hiPlay, play);
+    const hiCue = one('#sc-hi-cue');   // the cue under the card, on the sketch board only
+    wire(hiCue, play);
+    wire(one('#sc-hi-short'), () => go({ path: 'short' }));
+    all('.hi-pf').forEach((b) => wire(b, () => go(b.getAttribute('data-filter') ? { path: b.getAttribute('data-path'), filter: b.getAttribute('data-filter') } : { path: b.getAttribute('data-path') })));
+    this.takeOver = (e) => { if (!(e.type === 'pointerdown' && (hint.contains(e.target) || hiPlay.contains(e.target) || (hiCue && hiCue.contains(e.target))))) this.stopPlay(); };
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) => box.addEventListener(ev, this.takeOver, { passive: true }));
+    const toHello = () => {
+      const y = hello.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop;
+      // a real jump (not a nudge from just above the end): remember where they were, and offer the way back
+      if (y - box.scrollTop > box.clientHeight * 1.5) {
+        spot = box.scrollTop;
+        spotFrom = null;
+        spotBtn.classList.remove('small');
+        showBack();
+        if (this.spotTimer) window.clearTimeout(this.spotTimer);
+        this.spotTimer = window.setTimeout(() => { this.spotTimer = null; if (spot !== null) spotFrom = box.scrollTop; }, 1600);   // once the jump has landed
+      }
+      box.scrollTo({ top: y, behavior: smooth });
+    };
+    const backToSpot = () => {
+      if (spot === null) return;
+      const y = spot;
+      clearSpot();
+      box.scrollTo({ top: y, behavior: smooth });
+    };
+    wire(one('#sc-talk'), toHello);
+    // the menu that stays on top: the same three paths, the contact scene, and the name as the way back up
+    const barGo = all('.bar-go');
+    barGo.forEach((b, k) => wire(b, () => go({ path: pathIds[k] })));
+    wire(one('#sc-bar-talk'), toHello);
+    wire(one('#sc-bar-top'), () => { clearSpot(); box.scrollTo({ top: 0, behavior: smooth }); });
+    // the homepage inside says when it has somewhere to go back to; on wide screens the button for it sits in the menu
+    this.onBack = (e) => { mainBack = (e && e.detail && e.detail.label) || null; showBack(); };
+    box.addEventListener('portfolio-back', this.onBack);
+    wire(backBtn, () => { if (spot !== null) backToSpot(); else go({ back: true }); });
+    wire(spotBtn, backToSpot);
+    this.onPath = (e) => { clearSpot(); const id = e && e.detail && e.detail.path; barGo.forEach((b, k) => { if (pathIds[k] === id) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); }); };
+    box.addEventListener('portfolio-path', this.onPath);   // the homepage inside announces its path, and the event bubbles up to here
+    // the homepage below grows and shrinks as sections open: keep the last scene in step
+    if (typeof window.ResizeObserver !== 'undefined' && one('#sc-main')) {
+      this.sizeWatch = new window.ResizeObserver(() => this.schedule());
+      this.sizeWatch.observe(one('#sc-main'));
+    }
+    this.scrollBox = box;
+    box.addEventListener('scroll', this.schedule, { passive: true });
+    window.addEventListener('resize', this.schedule);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.schedule);
+    render();
+  }
+
+  componentWillUnmount() {
+    if (this.scrollBox && this.schedule) this.scrollBox.removeEventListener('scroll', this.schedule);
+    if (this.stopPlay) this.stopPlay();
+    if (this.scrollBox && this.onPath) this.scrollBox.removeEventListener('portfolio-path', this.onPath);
+    if (this.scrollBox && this.onBack) this.scrollBox.removeEventListener('portfolio-back', this.onBack);
+    if (this.spotTimer) { window.clearTimeout(this.spotTimer); this.spotTimer = null; }
+    if (this.numsFrame) { window.cancelAnimationFrame(this.numsFrame); this.numsFrame = null; }
+    if (this.scrollBox && this.takeOver) ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) => this.scrollBox.removeEventListener(ev, this.takeOver));
+    if (this.wired) this.wired.forEach((w) => w[0].removeEventListener('click', w[1]));
+    this.wired = null;
+    if (this.sizeWatch) { this.sizeWatch.disconnect(); this.sizeWatch = null; }
+    if (this.hiWatch) { this.hiWatch.disconnect(); this.hiWatch = null; }
+    if (this.scrollBox && this.hiScroll) this.scrollBox.removeEventListener('scroll', this.hiScroll);
+    if (this.hiTimer) { window.clearTimeout(this.hiTimer); this.hiTimer = null; }
+    if (typeof window !== 'undefined') {
+      if (this.schedule) window.removeEventListener('resize', this.schedule);
+      if (this.frame) window.cancelAnimationFrame(this.frame);
+    }
+    this.frame = null;
+  }
+
+  renderVals() {
+    if (!this.boxRef) this.boxRef = (el) => { this.boxEl = el; };
+    // the opening's wording lives here, once. `hl` is the part of the chibi's line that gets the highlight.
+    return {
+      accent: this.props.accent || '#F2B544',
+      boxRef: this.boxRef,
+      h1: "Hello, I'm Shermaine. I studied law. Now I build AI products.",
+      b1: { year: '2015', role: 'Law school', short: 'Law', head: 'I studied law.', pre: 'A ', hl: 'law degree', post: ' and a diploma in international arbitration.' },
+      b2: { year: '2018', role: 'First software job', short: 'Software', head: 'Now I build', pre: 'Then ', hl: 'eight years', post: ' in product and project delivery.' },
+      b3: { year: 'Now', role: 'Product manager in Malaysia', short: 'AI', head: 'AI products.', pre: 'Chatbots, computer vision and ', hl: 'AI agents', post: '.' },
+      b4: { pre: '', hl: 'Pick a path', post: ", and I'll take you there." }
+    };
+  }
+}
+</script>
+</body>
+</html>

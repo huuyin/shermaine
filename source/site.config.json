@@ -1,0 +1,34 @@
+{
+  "siteUrl": "https://huuyin.github.io/shermaine/",
+  "title": "Shermaine Tan | Product manager, AI products",
+  "description": "Shermaine Tan is a product manager in Malaysia building AI products: chatbots, computer vision and AI agents. Projects, story and how she thinks.",
+  "photo": "images/profile-picture.jpeg",
+  "email": "sm.shermainetan@gmail.com",
+  "emailSubject": "Portfolio Inquiry",
+  "linkedin": "https://www.linkedin.com/in/shermaine-tan-497bbb156/",
+  "cv": "SHERMAINE_TAN_CV.pdf",
+  "cvDesigned": "SHERMAINE_TAN_CV_designed.pdf",
+  "builds": [
+    {
+      "id": "demo-gantt",
+      "title": "Requirement-to-Gantt Planner",
+      "video": "videos/requirement-to-gantt.mp4",
+      "poster": "images/demo-gantt.jpg",
+      "github": ""
+    },
+    {
+      "id": "demo-evidence",
+      "title": "Feature Evidence Copilot",
+      "video": "videos/ai-backlog-review.mp4",
+      "poster": "images/demo-evidence.jpg",
+      "github": ""
+    },
+    {
+      "id": "demo-loyalty",
+      "title": "Loyalty Campaign Generator",
+      "video": "videos/joyrewards.mp4",
+      "poster": "images/demo-loyalty.jpg",
+      "github": ""
+    }
+  ]
+}
